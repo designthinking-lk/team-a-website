@@ -3,59 +3,116 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shootbuddy — quiet-eye analysis for basketball shooting</title>
-<meta name="description" content="Shootbuddy measures the quiet eye: how still a shooter's gaze holds between arm-raise and release. Meta Aria Gen 2 glasses for gaze, a phone on a tripod for the side view, three claps to align them. Runs entirely on one machine.">
-<meta name="theme-color" content="#703322">
+
+<title>Shootbuddy — Quiet Eye Training for Basketball Shooters</title>
+<meta name="description" content="Shootbuddy pairs Meta Aria smart glasses with a phone on a tripod to show you exactly how steady your eyes were on every shot — the quiet-eye habit sports science ties to elite shooters. No cloud, no upload, every shot on video.">
+<link rel="canonical" href="https://shootbuddy.designthinking.lk/">
+<meta name="theme-color" content="#0d0d0d">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Shootbuddy — quiet-eye analysis for basketball shooting">
-<meta property="og:description" content="Per-shot gaze stillness from smart glasses and a phone. No cloud, no database — every stage reads files off disk and writes files back.">
-<meta name="twitter:card" content="summary">
+<meta property="og:site_name" content="Shootbuddy">
+<meta property="og:title" content="Shootbuddy — Quiet Eye Training for Basketball Shooters">
+<meta property="og:description" content="See exactly how steady your eyes were in the half-second before every shot — measured on a real court with smart glasses and a phone, entirely on your own machine.">
+<meta property="og:url" content="https://shootbuddy.designthinking.lk/">
+<meta property="og:image" content="https://shootbuddy.designthinking.lk/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Shootbuddy app mark — smart glasses under a basketball hoop crosshair">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Shootbuddy — Quiet Eye Training for Basketball Shooters">
+<meta name="twitter:description" content="See exactly how steady your eyes were in the half-second before every shot — measured with smart glasses and a phone, entirely on your own machine.">
+<meta name="twitter:image" content="https://shootbuddy.designthinking.lk/assets/og-image.jpg">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%234a2016'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23f6e5be' stroke-width='2.5'/%3E%3Ccircle cx='16' cy='16' r='3.5' fill='%23ea3323'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..900;1,400..900&family=Inter:wght@400..700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Shootbuddy",
+  "applicationCategory": "SportsApplication",
+  "operatingSystem": "macOS, Linux",
+  "description": "Shootbuddy pairs Meta Aria smart glasses with a phone on a tripod to measure quiet-eye gaze stillness on every basketball shot, running entirely on one local machine with no cloud upload.",
+  "url": "https://shootbuddy.designthinking.lk/",
+  "image": "https://shootbuddy.designthinking.lk/assets/og-image.jpg",
+  "publisher": { "@type": "Organization", "name": "Shootbuddy" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What do I need to use Shootbuddy?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Meta's Aria Gen 2 smart glasses for the shooter, and any phone on a small tripod for the side view. That's the entire hardware list — clap three times to start a shot, and shoot." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does any of my footage get uploaded anywhere?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Everything is processed on one computer. Nothing about your face, your eyes, or your practice session is sent anywhere else — there is no cloud step and no server it talks to." }
+    },
+    {
+      "@type": "Question",
+      "name": "What sport does Shootbuddy work with?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Basketball shooting, today — free throws and jump shots from a fixed spot on the court, with the phone set up side-on." }
+    },
+    {
+      "@type": "Question",
+      "name": "How accurate is the made/miss detection?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It watches from the side with no net, so most calls are clear-cut. When a shot is genuinely too close to tell, Shootbuddy flags it as uncertain rather than guessing, and it can be corrected by hand in a single tap." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Shootbuddy a finished product?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Not yet. It is an early-stage project, tested so far across two real outdoor practice sessions rather than a lab. The source is open for anyone who wants to see exactly how it works." }
+    }
+  ]
+}
+</script>
 
 <style>
 /* ─────────────────────────────────────────────────────────────────────────
-   Tokens lifted verbatim from the dashboard's theme.css. The two-layer split
-   is enforced here too:
-
-     CHROME  brick + brand red. Page plane, nav, hero, section heads.
-     DATA    off-white surface. Every chart, every number, every status colour.
-
-   The brand red (#ea3323) is indistinguishable from a status red, so it never
-   appears inside a data card. Inside a card, red means MISS and nothing else.
+   Tokens match the live Shootbuddy dashboard's theme.css exactly: black
+   chrome + one orange, warm paper plane, white data cards. --accent is
+   chrome-only (nav, dark surfaces); anywhere on paper or a white card,
+   emphasis uses --accent-lo instead — the brand orange alone is under the
+   3:1 contrast floor on paper, so it never carries text there.
    ───────────────────────────────────────────────────────────────────────── */
 :root {
-  --brick-900: #4a2016;
-  --brick-700: #703322;
-  --brick-500: #8a4230;
-  --brand-red: #ea3323;
-  --cream:     #f6e5be;
+  --ink-900:   #0d0d0d;
+  --ink-800:   #1c1a18;
+  --accent:    #ec7a45;
+  --accent-lo: #c85b28;
+  --bone:      #f7f5f1;
 
-  --surface-1: #fafaf9;
-  --surface-2: #f2f1ee;
+  --paper:     #f1efea;
+  --grid-line: rgba(13, 13, 13, 0.045);
 
-  --ink-primary:   #0b0b0b;
-  --ink-secondary: #52514e;
-  --ink-muted:     #898781;
-  --gridline:      #e1e0d9;
-  --baseline:      #c3c2b7;
-  --hairline:      rgba(11, 11, 11, 0.10);
+  --surface-1: #ffffff;
+  --surface-2: #f4f2ee;
 
-  /* Validated as a pair on #fafaf9 — CVD dE 17.5. Always shipped with a shape. */
+  --ink-primary:   #0d0d0d;
+  --ink-secondary: #55534e;
+  --ink-muted:     #8a8781;
+  --gridline:      #e6e4dd;
+  --baseline:      #c4c2b9;
+  --hairline:      rgba(13, 13, 13, 0.12);
+
   --made:    #0ca30c;
   --miss:    #932525;
-  --unknown: #898781;
 
-  --font-display: "Archivo Black", "Anton", system-ui, sans-serif;
-  --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Archivo", "Archivo Black", system-ui, sans-serif;
+  --font-ui: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  --radius-lg: 22px;
-  --radius-md: 14px;
+  --radius-lg: 26px;
+  --radius-md: 16px;
   --radius-sm: 8px;
 
   --pad: clamp(16px, 4vw, 44px);
@@ -63,17 +120,17 @@
 }
 
 * { box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 body {
   margin: 0;
   background:
-    radial-gradient(1200px 520px at 72% -8%, var(--brick-500), transparent 62%),
-    var(--brick-700);
-  background-attachment: fixed;
-  color: var(--cream);
+    radial-gradient(1100px 480px at 80% -10%, rgba(236, 122, 69, 0.14), transparent 60%),
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px) 0 0 / 46px 46px,
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px) 0 0 / 46px 46px,
+    var(--paper);
+  color: var(--ink-primary);
   font-family: var(--font-ui);
   font-size: 16px;
   line-height: 1.6;
@@ -82,243 +139,305 @@ body {
 }
 
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad); }
-
 a { color: inherit; }
-:focus-visible { outline: 3px solid var(--cream); outline-offset: 3px; border-radius: 4px; }
+:focus-visible { outline: 3px solid var(--accent-lo); outline-offset: 3px; border-radius: 4px; }
+img, svg { max-width: 100%; }
 
 .skip {
   position: absolute; left: -9999px; top: 0;
-  background: var(--cream); color: var(--brick-900);
+  background: var(--bone); color: var(--ink-900);
   padding: 12px 18px; border-radius: 0 0 var(--radius-sm) 0;
   font-weight: 700; z-index: 100;
 }
 .skip:focus { left: 0; }
 
-/* ── Chrome ─────────────────────────────────────────────────────────────── */
+/* ── Chrome: nav ────────────────────────────────────────────────────────── */
 
 .nav {
+  position: sticky; top: 0; z-index: 40;
+  background: rgba(13, 13, 13, 0.94);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(247, 245, 241, 0.12);
+}
+.nav .wrap {
   display: flex; align-items: center; gap: 18px;
-  padding: 18px 0 8px; flex-wrap: wrap;
+  padding-top: 12px; padding-bottom: 12px; flex-wrap: wrap;
 }
 .wordmark {
-  font-family: var(--font-display);
-  letter-spacing: -0.02em; text-transform: uppercase;
-  font-size: 24px; color: var(--cream); text-decoration: none;
-  line-height: 1;
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--font-display); font-weight: 900; font-style: italic;
+  letter-spacing: -0.03em; text-transform: uppercase;
+  font-size: 21px; color: var(--bone); text-decoration: none; line-height: 1;
 }
-.wordmark span { color: var(--brand-red); }
+.wordmark span { color: var(--accent); }
+.wordmark img { display: block; height: 28px; width: 28px; border-radius: 7px; }
 .nav-spacer { flex: 1 1 auto; }
-.nav nav { display: flex; gap: 4px; flex-wrap: wrap; }
-.nav nav a {
-  text-decoration: none;
-  color: rgba(246, 229, 190, 0.82);
-  font-size: 14px; font-weight: 600;
-  padding: 8px 13px; border-radius: 999px;
+.nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+.nav-links a {
+  text-decoration: none; color: rgba(247, 245, 241, 0.78);
+  font-size: 13.5px; font-weight: 600;
+  padding: 8px 12px; border-radius: 999px;
 }
-.nav nav a:hover { background: rgba(246, 229, 190, 0.13); color: var(--cream); }
+.nav-links a:hover { background: rgba(247, 245, 241, 0.12); color: var(--bone); }
+.nav .cta { display: none; }
+@media (min-width: 880px) { .nav .cta { display: inline-block; } }
 
-.hero { padding: clamp(34px, 7vw, 76px) 0 34px; }
-.kicker {
-  letter-spacing: 0.26em; text-transform: uppercase;
-  font-size: 11.5px; font-weight: 700;
-  color: rgba(246, 229, 190, 0.62);
-  margin: 0 0 20px;
-}
-.hero h1 {
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  font-size: clamp(38px, 7.4vw, 82px);
-  line-height: 0.94;
-  letter-spacing: -0.025em;
-  margin: 0 0 24px;
-  max-width: 15ch;
-  color: var(--surface-1);
-}
-.hero h1 em { font-style: normal; color: var(--cream); }
-.hero .lead {
-  font-size: clamp(16.5px, 1.7vw, 20px);
-  line-height: 1.62;
-  color: rgba(246, 229, 190, 0.9);
-  max-width: 60ch;
-  margin: 0 0 30px;
-}
-.hero .lead b { color: var(--surface-1); font-weight: 600; }
+/* ── Buttons ────────────────────────────────────────────────────────────── */
 
-.ctas { display: flex; gap: 12px; flex-wrap: wrap; }
 .pill {
-  display: inline-block; text-decoration: none;
-  border: none; border-radius: 999px;
-  padding: 13px 24px;
-  font: 600 15px/1 var(--font-ui);
-  background: var(--brand-red); color: #fff;
+  display: inline-block; text-decoration: none; text-align: center;
+  border: none; border-radius: 999px; cursor: pointer;
+  padding: 13px 24px; font: 600 14.5px/1 var(--font-ui);
+  background: var(--ink-900); color: var(--bone);
 }
-.pill:hover { background: #d02a1b; }
+.pill:hover { background: var(--ink-800); }
 .pill.ghost {
-  background: transparent; color: var(--cream);
-  border: 1px solid rgba(246, 229, 190, 0.38);
+  background: transparent; color: var(--ink-primary);
+  border: 1.5px solid var(--hairline);
 }
-.pill.ghost:hover { background: rgba(246, 229, 190, 0.13); }
+.pill.ghost:hover { border-color: var(--ink-primary); }
+.pill.on-dark { background: var(--accent-lo); color: var(--bone); }
+.pill.on-dark:hover { background: #b04f22; }
+.ctas { display: flex; gap: 12px; flex-wrap: wrap; }
 
-.sectionhead { padding: 0 0 16px; }
+/* ── Section rhythm ─────────────────────────────────────────────────────── */
+
+section { padding: clamp(40px, 6.5vw, 74px) 0 0; scroll-margin-top: 76px; }
+section:last-of-type { padding-bottom: clamp(40px, 6.5vw, 74px); }
+
+.kicker {
+  letter-spacing: 0.24em; text-transform: uppercase;
+  font-size: 11px; font-weight: 700;
+  color: var(--accent-lo);
+  margin: 0 0 14px;
+}
+.sectionhead { padding: 0 0 30px; max-width: 74ch; }
+.sectionhead.center { margin: 0 auto; text-align: center; }
 .sectionhead h2 {
-  font-family: var(--font-display);
+  font-family: var(--font-display); font-weight: 800;
   text-transform: uppercase; letter-spacing: -0.01em;
-  font-size: clamp(19px, 2.6vw, 27px);
-  margin: 0; color: var(--cream);
+  font-size: clamp(22px, 3.4vw, 32px); line-height: 1.08;
+  margin: 0; color: var(--ink-primary);
 }
 .sectionhead p {
-  margin: 10px 0 0; max-width: 66ch;
-  font-size: 15.5px; color: rgba(246, 229, 190, 0.76);
+  margin: 12px 0 0; font-size: 16px; color: var(--ink-secondary); line-height: 1.6;
 }
 
-section { padding: clamp(34px, 6vw, 62px) 0 0; }
-section:last-of-type { padding-bottom: clamp(34px, 6vw, 62px); }
+/* ── Hero ───────────────────────────────────────────────────────────────── */
 
-/* ── Data layer ─────────────────────────────────────────────────────────── */
+.hero {
+  display: grid; gap: 40px; align-items: center;
+  grid-template-columns: 1.15fr 0.85fr;
+  padding-top: clamp(40px, 7vw, 76px); padding-bottom: 20px;
+}
+@media (max-width: 860px) { .hero { grid-template-columns: 1fr; text-align: center; } }
+
+.hero h1 {
+  font-family: var(--font-display); font-weight: 800; font-style: italic;
+  text-transform: uppercase;
+  font-size: clamp(34px, 5.6vw, 60px);
+  line-height: 1.03; letter-spacing: -0.02em;
+  margin: 0 0 22px; color: var(--ink-primary);
+}
+.hero h1 em { font-style: italic; color: var(--accent-lo); }
+.hero .lead {
+  font-size: clamp(16px, 1.6vw, 18.5px); line-height: 1.62;
+  color: var(--ink-secondary); max-width: 54ch; margin: 0 0 28px;
+}
+@media (max-width: 860px) { .hero .lead { margin-inline: auto; } }
+.hero .lead b { color: var(--ink-primary); font-weight: 700; }
+
+.hero-art { display: flex; justify-content: center; }
+.hero-art figure { margin: 0; text-align: center; }
+.hero-art img {
+  width: min(320px, 78vw); height: auto; display: block; margin: 0 auto;
+  filter: drop-shadow(0 20px 34px rgba(13, 13, 13, 0.22));
+}
+.hero-art figcaption {
+  margin-top: 14px; font-size: 12px; color: var(--ink-muted);
+  text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;
+}
+
+/* Trust strip */
+.trust {
+  display: grid; gap: 12px; margin-top: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+.trust-item {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--surface-1); border: 1px solid var(--hairline);
+  border-radius: var(--radius-md); padding: 13px 16px;
+  font-size: 13.5px; font-weight: 600; color: var(--ink-primary);
+}
+.trust-item .icon-badge { width: 34px; height: 34px; }
+.trust-item .icon-badge svg { width: 18px; height: 18px; }
+
+/* ── Icon badges (shared) ───────────────────────────────────────────────── */
+
+.icon-badge {
+  display: grid; place-items: center; flex: none;
+  width: 52px; height: 52px; border-radius: 999px;
+  background: rgba(200, 91, 40, 0.09); color: var(--accent-lo);
+}
+.icon-badge svg { width: 26px; height: 26px; }
+
+/* ── Cards / data layer ─────────────────────────────────────────────────── */
 
 .card {
-  background: var(--surface-1);
-  color: var(--ink-primary);
-  border-radius: var(--radius-lg);
-  padding: 22px clamp(18px, 2.4vw, 26px) 24px;
-  box-shadow: 0 1px 0 var(--hairline);
+  background: var(--surface-1); border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg); padding: 24px clamp(18px, 2.4vw, 28px) 26px;
 }
 .card h3 {
-  font-family: var(--font-display);
-  text-transform: uppercase; letter-spacing: -0.01em;
-  font-size: 15px; margin: 0 0 4px; color: var(--ink-primary);
+  font-family: var(--font-display); font-weight: 800;
+  text-transform: uppercase; letter-spacing: -0.005em;
+  font-size: 16px; margin: 0 0 8px; color: var(--ink-primary);
 }
-.card p { font-size: 14.5px; color: var(--ink-secondary); margin: 0 0 12px; max-width: 70ch; }
-.card p:last-child { margin-bottom: 0; }
+.card p { font-size: 14.5px; color: var(--ink-secondary); margin: 0; max-width: 64ch; }
 
-.kpis {
-  display: grid; gap: 14px;
-  grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+/* Feature grid */
+.grid-4 { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+.feature { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+
+/* Process timeline */
+.process { display: grid; gap: 34px 20px; grid-template-columns: repeat(4, 1fr); position: relative; margin-top: 6px; }
+.process::before {
+  content: ""; position: absolute; top: 26px; left: 10%; right: 10%; height: 1.5px;
+  background: var(--gridline); z-index: 0;
 }
-.kpi { background: var(--surface-1); border-radius: var(--radius-md); padding: 17px 18px 15px; }
-.kpi .label {
-  font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.09em;
-  color: var(--ink-muted); font-weight: 700;
+.pstep { position: relative; z-index: 1; text-align: left; }
+.pstep .icon-badge { background: var(--surface-1); border: 1px solid var(--hairline); box-shadow: 0 0 0 6px var(--paper); }
+.pstep .n {
+  font-family: var(--font-display); font-weight: 800; font-size: 11px;
+  color: var(--ink-muted); letter-spacing: 0.1em; margin: 14px 0 6px;
 }
-.kpi .value {
-  font-size: 38px; line-height: 1.05; font-weight: 700;
-  margin-top: 6px; color: var(--ink-primary);
+.pstep h3 {
+  font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
+  font-size: 15px; margin: 0 0 6px; color: var(--ink-primary); letter-spacing: -0.005em;
 }
+.pstep p { font-size: 13.5px; color: var(--ink-secondary); margin: 0; line-height: 1.55; }
+@media (max-width: 760px) {
+  .process { grid-template-columns: 1fr; gap: 26px; }
+  .process::before { display: none; }
+}
+
+/* Science / quiet-eye diagram */
+.science-layout { display: grid; gap: 34px; grid-template-columns: 1.1fr 0.9fr; align-items: center; }
+@media (max-width: 860px) { .science-layout { grid-template-columns: 1fr; } }
+.science-copy p { font-size: 15.5px; color: var(--ink-secondary); margin: 0 0 16px; line-height: 1.65; }
+.science-copy p:last-child { margin-bottom: 0; }
+
+.diagram-pair { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+.diagram-panel {
+  background: var(--surface-1); border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg); padding: 18px 18px 16px; text-align: center;
+  flex: 1 1 200px; max-width: 240px;
+}
+.diagram-panel svg { width: 100%; height: auto; display: block; margin: 0 auto 10px; }
+.diagram-panel .dlabel {
+  font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
+  font-size: 13px; letter-spacing: 0.02em; color: var(--ink-primary); margin-bottom: 4px;
+}
+.diagram-panel .dsub { font-size: 12px; color: var(--ink-secondary); line-height: 1.5; }
+
+/* KPIs */
+.kpis { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(168px, 1fr)); }
+.kpi { background: var(--surface-1); border: 1px solid var(--hairline); border-radius: var(--radius-md); padding: 18px 18px 15px; }
+.kpi .label { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.09em; color: var(--ink-muted); font-weight: 700; }
+.kpi .value { font-size: 38px; line-height: 1.05; font-weight: 700; margin-top: 7px; color: var(--ink-primary); letter-spacing: -0.02em; }
 .kpi .value small { font-size: 14px; font-weight: 600; color: var(--ink-secondary); }
-.kpi .foot { font-size: 11.5px; color: var(--ink-secondary); margin-top: 5px; line-height: 1.5; }
+.kpi .foot { font-size: 11.5px; color: var(--ink-secondary); margin-top: 6px; line-height: 1.5; }
 
-.steps { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); }
-.step .n {
-  font-family: var(--font-display);
-  font-size: 13px; color: var(--ink-muted);
-  letter-spacing: 0.06em; margin-bottom: 10px;
-}
-.step ul { margin: 12px 0 0; padding-left: 18px; font-size: 13.5px; color: var(--ink-secondary); }
-.step li { margin-bottom: 5px; }
-.step li:last-child { margin-bottom: 0; }
-
-.two { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
-
-/* Chart card — the only place status colour is allowed */
-.chartcard { grid-column: 1 / -1; }
-.legend {
-  display: flex; gap: 18px; flex-wrap: wrap; align-items: center;
-  font-size: 12.5px; color: var(--ink-secondary); margin: 4px 0 14px;
-}
+/* Results chart */
+.chartcard .sub { font-size: 14px; color: var(--ink-secondary); margin: 6px 0 16px; max-width: 66ch; }
+.legend { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; font-size: 12.5px; color: var(--ink-secondary); margin: 0 0 14px; }
 .legend .item { display: inline-flex; align-items: center; gap: 7px; }
 .legend svg { flex: none; }
-
 .chartwrap { overflow-x: auto; }
 .chart { display: block; width: 100%; min-width: 560px; height: auto; }
 .chart .grid { stroke: var(--gridline); stroke-width: 1; }
-.chart .base  { stroke: var(--gridline); stroke-width: 1; }
+.chart .base { stroke: var(--gridline); stroke-width: 1; }
 .chart .thresh { stroke: var(--ink-muted); stroke-width: 1.5; stroke-dasharray: 5 5; }
 .chart .thresh-lab { font: 600 11px var(--font-ui); fill: var(--ink-secondary); }
 .chart .tick { font: 500 11px var(--font-ui); fill: var(--ink-muted); }
-.chart .row-lab {
-  font: 700 11px var(--font-ui); fill: var(--ink-primary);
-  text-transform: uppercase; letter-spacing: 0.07em;
-}
+.chart .row-lab { font: 700 11px var(--font-ui); fill: var(--ink-primary); text-transform: uppercase; letter-spacing: 0.07em; }
 .chart .row-sub { font: 500 10.5px var(--font-ui); fill: var(--ink-muted); }
 .chart .median { stroke: var(--ink-primary); stroke-width: 2.5; }
 .chart .m-made { fill: var(--made); }
 .chart .m-miss { fill: none; stroke: var(--miss); stroke-width: 2; }
-.chart .m-unk  { fill: var(--unknown); }
-.axis-title {
-  font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
-  color: var(--ink-muted); font-weight: 700; text-align: center; margin: 6px 0 0;
-}
+.chart .m-unk { fill: var(--ink-muted); }
+.axis-title { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); font-weight: 700; text-align: center; margin: 8px 0 0; }
 
 .note {
-  font-size: 12.5px; color: var(--ink-secondary);
-  background: var(--surface-2);
-  border-left: 3px solid var(--baseline);
-  padding: 11px 14px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  margin-top: 16px; line-height: 1.55;
+  font-size: 13px; color: var(--ink-secondary); background: var(--surface-2);
+  border-left: 3px solid var(--baseline); padding: 12px 15px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin-top: 18px; line-height: 1.6;
 }
 .note b { color: var(--ink-primary); }
 
-.tablewrap { overflow-x: auto; margin-top: 6px; }
-table.data { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 13.5px; }
-table.data th, table.data td {
-  text-align: left; padding: 11px 12px;
-  border-bottom: 1px solid var(--gridline); vertical-align: top;
-}
-table.data th {
-  color: var(--ink-muted); font-weight: 700; text-transform: uppercase;
-  font-size: 10.5px; letter-spacing: 0.07em; white-space: nowrap;
-}
-table.data td:first-child { color: var(--ink-primary); font-weight: 600; width: 38%; }
-table.data td:last-child { color: var(--ink-secondary); }
-table.data tr:last-child td { border-bottom: none; }
+.two { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin-top: 16px; }
 
-.tag {
-  display: inline-block; font-size: 10.5px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.07em;
-  padding: 3px 9px; border-radius: 999px; margin-bottom: 5px;
-  background: var(--surface-2); color: var(--ink-secondary);
+/* What's next */
+.roadmap { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+.roadmap .card h3 { display: flex; align-items: center; gap: 10px; }
+.roadmap .tag {
+  font-family: var(--font-display); font-weight: 800; font-size: 11px;
+  color: var(--accent-lo); letter-spacing: 0.06em;
 }
-.tag.solid       { background: #e3f3e3; color: #0a6b0a; }
-.tag.flagged     { background: var(--surface-2); color: var(--ink-secondary); }
-.tag.placeholder { background: #f4e2e2; color: var(--miss); }
 
-/* Code — chrome layer, so it sits on ink not on a data surface */
-.code {
-  background: var(--brick-900);
-  border: 1px solid rgba(246, 229, 190, 0.16);
-  border-radius: var(--radius-md);
-  padding: 18px 20px;
-  overflow-x: auto;
-  margin: 0;
+/* FAQ */
+.faq { display: grid; gap: 10px; max-width: 820px; }
+.faq-item {
+  background: var(--surface-1); border: 1px solid var(--hairline);
+  border-radius: var(--radius-md); padding: 4px 20px;
 }
-.code pre { margin: 0; }
-.code code {
-  font: 13px/1.85 ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
-  color: var(--cream); white-space: pre;
+.faq-item summary {
+  list-style: none; cursor: pointer; padding: 16px 26px 16px 0;
+  font-family: var(--font-display); font-weight: 700; font-size: 15px;
+  color: var(--ink-primary); position: relative;
 }
-.code .c { color: rgba(246, 229, 190, 0.5); }
-.code .p { color: var(--brand-red); font-weight: 700; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+"; position: absolute; right: 0; top: 14px;
+  font: 400 22px/1 var(--font-ui); color: var(--ink-muted); transition: transform 0.15s ease;
+}
+.faq-item[open] summary::after { transform: rotate(45deg); color: var(--accent-lo); }
+.faq-item p { margin: 0 0 18px; font-size: 14.5px; color: var(--ink-secondary); line-height: 1.6; max-width: 68ch; }
 
-.facts { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-.fact h3 {
-  font-family: var(--font-display); text-transform: uppercase;
-  font-size: 14px; margin: 0 0 8px; color: var(--cream);
+/* Closing CTA */
+.closing {
+  background: var(--ink-900); color: var(--bone); border-radius: var(--radius-lg);
+  padding: clamp(32px, 5vw, 52px) clamp(24px, 5vw, 52px); text-align: center;
 }
-.fact p { margin: 0; font-size: 14.5px; color: rgba(246, 229, 190, 0.78); }
+.closing h2 {
+  font-family: var(--font-display); font-weight: 800; font-style: italic;
+  text-transform: uppercase; font-size: clamp(24px, 3.6vw, 36px);
+  margin: 0 0 14px; letter-spacing: -0.01em;
+}
+.closing h2 em { color: var(--accent); font-style: italic; }
+.closing p { font-size: 15.5px; color: rgba(247, 245, 241, 0.78); max-width: 56ch; margin: 0 auto 26px; line-height: 1.6; }
+.closing .ctas { justify-content: center; }
+.closing .pill.ghost { color: var(--bone); border-color: rgba(247, 245, 241, 0.32); }
+.closing .pill.ghost:hover { background: rgba(247, 245, 241, 0.12); }
+
+/* ── Footer ─────────────────────────────────────────────────────────────── */
 
 footer {
-  border-top: 1px solid rgba(246, 229, 190, 0.18);
-  margin-top: clamp(30px, 6vw, 58px);
-  padding: 30px 0 44px;
-  font-size: 13.5px; color: rgba(246, 229, 190, 0.6);
+  background: var(--ink-900); color: var(--bone); margin-top: clamp(40px, 6vw, 70px);
 }
-footer .row { display: flex; gap: 18px; flex-wrap: wrap; align-items: baseline; }
-footer .row .nav-spacer { flex: 1 1 auto; }
-footer a { color: rgba(246, 229, 190, 0.8); }
+footer .wrap { padding: 40px var(--pad) 34px; }
+footer .fgrid { display: flex; justify-content: space-between; gap: 30px; flex-wrap: wrap; }
+footer .wordmark { margin-bottom: 10px; }
+footer .tagline { font-size: 13.5px; color: rgba(247, 245, 241, 0.62); max-width: 32ch; line-height: 1.55; }
+footer nav { display: flex; flex-direction: column; gap: 8px; }
+footer nav a { font-size: 13.5px; color: rgba(247, 245, 241, 0.78); text-decoration: none; }
+footer nav a:hover { color: var(--bone); text-decoration: underline; }
+footer .fnote {
+  border-top: 1px solid rgba(247, 245, 241, 0.14); margin-top: 30px; padding-top: 18px;
+  font-size: 12px; color: rgba(247, 245, 241, 0.5); display: flex; gap: 14px; flex-wrap: wrap; justify-content: space-between;
+}
 
 @media (max-width: 620px) {
   .kpi .value { font-size: 32px; }
-  .hero { padding-top: 26px; }
 }
 </style>
 </head>
@@ -326,170 +445,285 @@ footer a { color: rgba(246, 229, 190, 0.8); }
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<div class="wrap">
-  <header class="nav">
-    <a class="wordmark" href="/">Shoot<span>buddy</span></a>
+<header class="nav">
+  <div class="wrap">
+    <a class="wordmark" href="#top">
+      <img src="/assets/favicon-32.png" alt="" width="28" height="28">
+      Shoot<span>buddy</span>
+    </a>
     <span class="nav-spacer"></span>
-    <nav aria-label="Sections">
+    <nav class="nav-links" aria-label="Sections">
       <a href="#how">How it works</a>
-      <a href="#metric">The metric</a>
-      <a href="#claims">What it claims</a>
-      <a href="#run">Run it</a>
+      <a href="#science">The science</a>
+      <a href="#why">Why it's different</a>
+      <a href="#results">Early results</a>
+      <a href="#faq">FAQ</a>
     </nav>
-  </header>
-</div>
+    <a class="pill on-dark cta" href="#how">See it in action</a>
+  </div>
+</header>
 
 <main id="main">
 
-  <!-- ── Hero ───────────────────────────────────────────────────────────── -->
+  <!-- ── Hero ─────────────────────────────────────────────────────────── -->
   <div class="wrap">
-    <section class="hero" style="padding-top:clamp(30px,6vw,68px)">
-      <p class="kicker">ICE · Team C</p>
-      <h1>The last half&#8209;second <em>before you shoot</em></h1>
-      <p class="lead">
-        Elite shooters hold their gaze still on the target just before release. Sports science
-        calls it the <b>quiet eye</b>, and until now measuring it meant a lab. Shootbuddy measures
-        it on an outdoor court from <b>a pair of smart glasses and a phone on a tripod</b> —
-        every shot, every session, entirely on your own machine.
-      </p>
-      <div class="ctas">
-        <a class="pill" href="#how">How it works</a>
-        <a class="pill ghost" href="#claims">What the numbers claim</a>
+    <section id="top" class="hero" style="padding-top:clamp(28px,5vw,56px)">
+      <div>
+        <p class="kicker">Basketball shot training</p>
+        <h1>The quietest half&#8209;second <em>wins the shot</em></h1>
+        <p class="lead">
+          Elite shooters lock their eyes on the target and hold perfectly still for a beat
+          before they release. Coaches call it the <b>quiet eye</b>. Shootbuddy measures it
+          with a pair of smart glasses and a phone on a tripod — no lab, just your own court.
+        </p>
+        <div class="ctas">
+          <a class="pill" href="#how">See how it works</a>
+          <a class="pill ghost" href="#results">Look at real results</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <figure>
+          <picture>
+            <source srcset="/assets/logo-hero.webp" type="image/webp">
+            <img src="/assets/logo-hero.png" width="320" height="320"
+                 alt="The Shootbuddy app mark: smart glasses beneath a basketball crosshair over a hoop">
+          </picture>
+          <figcaption>Built on Meta Aria Gen 2 smart glasses</figcaption>
+        </figure>
       </div>
     </section>
   </div>
 
-  <!-- ── Numbers ────────────────────────────────────────────────────────── -->
+  <!-- ── Trust strip ──────────────────────────────────────────────────── -->
   <div class="wrap">
-    <section aria-labelledby="numbers-h" style="padding-top:6px">
+    <section aria-label="At a glance" style="padding-top:10px">
+      <div class="trust">
+        <div class="trust-item">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="20" r="5.5"/><circle cx="24" cy="20" r="5.5"/><path d="M13.5 19h5"/><path d="M2.5 18l3.5-2"/><path d="M29.5 18l-3.5-2"/></svg>
+          </span>
+          Works with Meta Aria smart glasses
+        </div>
+        <div class="trust-item">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="15" width="18" height="13" rx="3"/><path d="M11 15v-4a5 5 0 0 1 10 0v4"/><circle cx="16" cy="20.5" r="1.5" fill="currentColor" stroke="none"/><line x1="16" y1="21.5" x2="16" y2="24"/></svg>
+          </span>
+          Nothing uploaded — runs on one computer
+        </div>
+        <div class="trust-item">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="13"/><path d="M13 11l9 5-9 5z" fill="currentColor" stroke="none"/></svg>
+          </span>
+          Every shot saved on video
+        </div>
+        <div class="trust-item">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3c5 0 9 4 9 9 0 7-9 17-9 17S7 19 7 12c0-5 4-9 9-9Z"/><circle cx="16" cy="12" r="3.4"/></svg>
+          </span>
+          Tested outdoors, on a real hoop
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── The science ──────────────────────────────────────────────────── -->
+  <div class="wrap">
+    <section id="science" aria-labelledby="science-h">
+      <p class="kicker">The science</p>
       <div class="sectionhead">
-        <h2 id="numbers-h">Two sessions, on a real court</h2>
+        <h2 id="science-h">The habit great shooters share</h2>
+      </div>
+      <div class="science-layout">
+        <div class="science-copy">
+          <p>
+            For decades, sports scientists have studied what separates elite performers from
+            everyone else in the instant before they act — a golfer over a putt, a shooter at
+            the free-throw line, a keeper facing a penalty. The pattern shows up again and
+            again: the best performers find the target with their eyes early, then hold their
+            gaze still on it for longer than less consistent performers do. Researchers call
+            this the <b>quiet eye</b>.
+          </p>
+          <p>
+            Seeing it has usually meant a lab, a calibrated eye tracker, and a technician
+            running the session. Shootbuddy brings the same idea onto an ordinary court —
+            just smart glasses on the shooter and a phone on a tripod.
+          </p>
+        </div>
+        <div class="diagram-pair" role="img" aria-label="Two diagrams comparing gaze patterns: a steady quiet eye holds tightly to one point near the target, while a searching gaze scatters widely across it.">
+          <div class="diagram-panel">
+            <svg viewBox="0 0 140 140" aria-hidden="true">
+              <circle cx="70" cy="70" r="58" fill="none" stroke="var(--gridline)" stroke-width="1.2"/>
+              <circle cx="70" cy="70" r="38" fill="none" stroke="var(--gridline)" stroke-width="1.2"/>
+              <circle cx="70" cy="70" r="18" fill="none" stroke="var(--gridline)" stroke-width="1.2"/>
+              <line x1="70" y1="8" x2="70" y2="132" stroke="var(--gridline)" stroke-width="1.2"/>
+              <line x1="8" y1="70" x2="132" y2="70" stroke="var(--gridline)" stroke-width="1.2"/>
+              <circle cx="70" cy="70" r="3" fill="var(--ink-primary)"/>
+              <circle cx="74" cy="67" r="3" fill="var(--ink-primary)"/>
+              <circle cx="65" cy="72" r="3" fill="var(--ink-primary)"/>
+              <circle cx="72" cy="76" r="3" fill="var(--ink-primary)"/>
+              <circle cx="67" cy="64" r="3" fill="var(--ink-primary)"/>
+              <circle cx="76" cy="71" r="3" fill="var(--ink-primary)"/>
+              <circle cx="64" cy="67" r="3" fill="var(--ink-primary)"/>
+              <circle cx="71" cy="63" r="3" fill="var(--ink-primary)"/>
+            </svg>
+            <div class="dlabel">Steady</div>
+            <div class="dsub">The quiet eye — gaze holds tight to one point through the shot.</div>
+          </div>
+          <div class="diagram-panel">
+            <svg viewBox="0 0 140 140" aria-hidden="true">
+              <circle cx="70" cy="70" r="58" fill="none" stroke="var(--gridline)" stroke-width="1.2"/>
+              <circle cx="70" cy="70" r="38" fill="none" stroke="var(--gridline)" stroke-width="1.2"/>
+              <circle cx="70" cy="70" r="18" fill="none" stroke="var(--gridline)" stroke-width="1.2"/>
+              <line x1="70" y1="8" x2="70" y2="132" stroke="var(--gridline)" stroke-width="1.2"/>
+              <line x1="8" y1="70" x2="132" y2="70" stroke="var(--gridline)" stroke-width="1.2"/>
+              <circle cx="70" cy="70" r="3" fill="var(--ink-muted)"/>
+              <circle cx="35" cy="50" r="3" fill="var(--ink-muted)"/>
+              <circle cx="100" cy="40" r="3" fill="var(--ink-muted)"/>
+              <circle cx="25" cy="95" r="3" fill="var(--ink-muted)"/>
+              <circle cx="105" cy="100" r="3" fill="var(--ink-muted)"/>
+              <circle cx="55" cy="25" r="3" fill="var(--ink-muted)"/>
+              <circle cx="90" cy="110" r="3" fill="var(--ink-muted)"/>
+              <circle cx="18" cy="65" r="3" fill="var(--ink-muted)"/>
+              <circle cx="110" cy="72" r="3" fill="var(--ink-muted)"/>
+              <circle cx="58" cy="108" r="3" fill="var(--ink-muted)"/>
+            </svg>
+            <div class="dlabel">Searching</div>
+            <div class="dsub">Gaze jumps between the ball, the rim, and the defender.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── How it works ─────────────────────────────────────────────────── -->
+  <div class="wrap">
+    <section id="how" aria-labelledby="how-h">
+      <p class="kicker">Methodology</p>
+      <div class="sectionhead">
+        <h2 id="how-h">How Shootbuddy sees your shot</h2>
+        <p>Four stages, from the court to your screen — nothing you have to tag or label by hand.</p>
+      </div>
+
+      <div class="process">
+        <div class="pstep">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="20" r="5.5"/><circle cx="24" cy="20" r="5.5"/><path d="M13.5 19h5"/><path d="M2.5 18l3.5-2"/><path d="M29.5 18l-3.5-2"/></svg>
+          </span>
+          <div class="n">01 · Set up</div>
+          <h3>Wear it, aim a phone</h3>
+          <p>The shooter puts on the smart glasses. A phone goes on a tripod off to the side. Clap three times, then shoot — that's the entire setup.</p>
+        </div>
+        <div class="pstep">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="2.6" height="6" rx="1.3" fill="currentColor" stroke="none"/><rect x="9.5" y="6" width="2.6" height="14" rx="1.3" fill="currentColor" stroke="none"/><rect x="15" y="11" width="2.6" height="4" rx="1.3" fill="currentColor" stroke="none"/><rect x="20.5" y="4" width="2.6" height="18" rx="1.3" fill="currentColor" stroke="none"/><rect x="26" y="9" width="2.6" height="8" rx="1.3" fill="currentColor" stroke="none"/><line x1="20.8" y1="1" x2="20.8" y2="27" stroke-dasharray="2 3"/></svg>
+          </span>
+          <div class="n">02 · Sync</div>
+          <h3>It lines everything up</h3>
+          <p>The glasses and the phone record on their own separate clocks. Those three claps let Shootbuddy line the two recordings up automatically, down to a fraction of a video frame.</p>
+        </div>
+        <div class="pstep">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16C2 16 8 6 16 6s14 10 14 10-6 10-14 10S2 16 2 16Z"/><circle cx="16" cy="16" r="5"/><line x1="16" y1="12" x2="16" y2="20"/><line x1="12" y1="16" x2="20" y2="16"/></svg>
+          </span>
+          <div class="n">03 · Watch</div>
+          <h3>It watches every shot</h3>
+          <p>Computer vision follows the shooter through the whole session — when the arm goes up, when the ball leaves the hand, and whether it goes in — without anyone tagging a single frame.</p>
+        </div>
+        <div class="pstep">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="13"/><path d="M10 17l4 4 8-9"/></svg>
+          </span>
+          <div class="n">04 · Learn</div>
+          <h3>It shows you what mattered</h3>
+          <p>For every shot, see exactly how still your gaze held in the instant before release, lined up against whether the shot went in — with the clip to prove it.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── Why it's different ───────────────────────────────────────────── -->
+  <div class="wrap">
+    <section id="why" aria-labelledby="why-h">
+      <p class="kicker">Why it's different</p>
+      <div class="sectionhead">
+        <h2 id="why-h">Built this way on purpose</h2>
+        <p>A few decisions we made early, and won't compromise on.</p>
+      </div>
+      <div class="grid-4">
+        <div class="card feature">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="15" width="18" height="13" rx="3"/><path d="M11 15v-4a5 5 0 0 1 10 0v4"/><circle cx="16" cy="20.5" r="1.5" fill="currentColor" stroke="none"/><line x1="16" y1="21.5" x2="16" y2="24"/></svg>
+          </span>
+          <h3>Nothing leaves your device</h3>
+          <p>Footage of your face and your eyes is about as personal as data gets. Shootbuddy runs entirely on one computer — nothing is ever uploaded.</p>
+        </div>
+        <div class="card feature">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="13"/><path d="M13 11l9 5-9 5z" fill="currentColor" stroke="none"/></svg>
+          </span>
+          <h3>Every shot, on video</h3>
+          <p>A number on its own can be wrong and you'd never know it. Every shot Shootbuddy scores comes with the clip, so you can always check it with your own eyes.</p>
+        </div>
+        <div class="card feature">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3c5 0 9 4 9 9 0 7-9 17-9 17S7 19 7 12c0-5 4-9 9-9Z"/><circle cx="16" cy="12" r="3.4"/></svg>
+          </span>
+          <h3>Built for a real court</h3>
+          <p>No lab, no green screen. Shootbuddy was built and tested outdoors, on a normal hoop, during a normal practice session.</p>
+        </div>
+        <div class="card feature">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3l11 4.5v7c0 8-11 14.5-11 14.5S5 22.5 5 14.5v-7Z"/><path d="M11 16l3.5 3.5L21 12"/></svg>
+          </span>
+          <h3>Honest about uncertain calls</h3>
+          <p>When a shot is too close to call, Shootbuddy says so instead of guessing — and a coach can correct it with a single tap.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── Early results ─────────────────────────────────────────────────── -->
+  <div class="wrap">
+    <section id="results" aria-labelledby="results-h">
+      <p class="kicker">Early results</p>
+      <div class="sectionhead">
+        <h2 id="results-h">What we've seen so far</h2>
         <p>
-          14&nbsp;minutes 14&nbsp;seconds of footage, 71&nbsp;clap markers, 33&nbsp;shots with a
-          complete quiet-eye window. Everything below is measured from those recordings — nothing
-          here is a projection.
+          We're early, and we'd rather show real numbers than a polished demo. This is every
+          shot from the first two sessions we've recorded — nothing projected, nothing
+          cherry-picked.
         </p>
       </div>
+
       <div class="kpis">
+        <div class="kpi">
+          <div class="label">Practice sessions</div>
+          <div class="value">2</div>
+          <div class="foot">recorded outdoors, on a real hoop</div>
+        </div>
         <div class="kpi">
           <div class="label">Shots analysed</div>
           <div class="value">33</div>
-          <div class="foot">of 71 clap markers recorded</div>
+          <div class="foot">out of 71 shot attempts caught on camera</div>
         </div>
         <div class="kpi">
-          <div class="label">Accuracy</div>
-          <div class="value">40<small>%</small></div>
-          <div class="foot">12 made · 18 miss · 3 undetermined</div>
+          <div class="label">Footage reviewed</div>
+          <div class="value">14<small>min</small></div>
+          <div class="foot">across both sessions</div>
         </div>
         <div class="kpi">
-          <div class="label">Median dispersion</div>
-          <div class="value">2.50<small>°</small></div>
-          <div class="foot">angular SD, all shots pooled</div>
-        </div>
-        <div class="kpi">
-          <div class="label">Median quiet eye</div>
-          <div class="value">800<small>ms</small></div>
-          <div class="foot">arm-raise → release</div>
-        </div>
-        <div class="kpi">
-          <div class="label">Clock drift</div>
-          <div class="value">21<small>ms</small></div>
-          <div class="foot">over 5 min — under one phone frame</div>
+          <div class="label">Clock sync</div>
+          <div class="value">&lt;1<small>frame</small></div>
+          <div class="foot">glasses and phone stay aligned to well under one video frame</div>
         </div>
       </div>
-    </section>
-  </div>
 
-  <!-- ── How it works ───────────────────────────────────────────────────── -->
-  <div class="wrap">
-    <section id="how" aria-labelledby="how-h">
-      <div class="sectionhead">
-        <h2 id="how-h">Four stages, each one checkable</h2>
-        <p>
-          No stage is trusted because the stage before it looked confident. Every one writes files
-          to disk that you can open, and two of them stop the run outright if the evidence is thin.
-        </p>
-      </div>
-      <div class="steps">
-
-        <article class="card step">
-          <div class="n">01</div>
-          <h3>Record</h3>
-          <p>
-            Meta Aria Gen&nbsp;2 glasses on the shooter, a phone on a tripod side-on. Clap three
-            times, then shoot.
-          </p>
-          <ul>
-            <li>Glasses give RGB, 8-mic audio and eye gaze</li>
-            <li>Phone gives the side view the pipeline scores shots from</li>
-            <li>1–6&nbsp;GB per VRS recording</li>
-          </ul>
-        </article>
-
-        <article class="card step">
-          <div class="n">02</div>
-          <h3>Sync</h3>
-          <p>
-            The three claps line up two clocks that never agreed. One global offset, ~21&nbsp;ms of
-            drift over five minutes.
-          </p>
-          <ul>
-            <li>Wall-clock overlap checked <em>before</em> audio is trusted</li>
-            <li>Per-shot windows carved from the aligned timeline</li>
-            <li>Worst-case error under one phone frame</li>
-          </ul>
-        </article>
-
-        <article class="card step">
-          <div class="n">03</div>
-          <h3>Detect</h3>
-          <p>
-            YOLO11 pose finds the arm raise. YOLO11 detection finds the ball, the release, and
-            whether it went in.
-          </p>
-          <ul>
-            <li>Every marker burned onto the video to judge by eye</li>
-            <li>Thin margins return <em>uncertain</em> rather than guessing</li>
-            <li>Wrong outcomes are correctable from the dashboard</li>
-          </ul>
-        </article>
-
-        <article class="card step">
-          <div class="n">04</div>
-          <h3>Measure</h3>
-          <p>
-            Slice the gaze samples between raise and release, and measure how far they wandered.
-          </p>
-          <ul>
-            <li>Per-axis SD — <em>which way</em> the gaze drifted</li>
-            <li>Combined SD — one number to rank shots</li>
-            <li>BCEA — the 68% confidence ellipse area</li>
-          </ul>
-        </article>
-
-      </div>
-    </section>
-  </div>
-
-  <!-- ── The metric ─────────────────────────────────────────────────────── -->
-  <div class="wrap">
-    <section id="metric" aria-labelledby="metric-h">
-      <div class="sectionhead">
-        <h2 id="metric-h">The metric, and what it actually showed</h2>
-        <p>
-          Dispersion is the headline instead of where-on-the-hoop-they-looked for a measured
-          reason: the gaze is uncalibrated, so it carries a fixed per-wearer bias. Variance is
-          translation-invariant — a constant offset cancels out of it completely, and does not
-          cancel out of absolute position.
-        </p>
-      </div>
-
-      <div class="two">
-        <div class="card chartcard">
-          <h3>Every analysed shot, pooled</h3>
-          <p>
-            One mark per shot, placed by the gaze dispersion measured inside its quiet-eye window.
-            The heavy tick is each row's median.
+      <div class="two" style="margin-top:28px">
+        <div class="card chartcard" style="grid-column:1/-1">
+          <h3>Every shot we've measured</h3>
+          <p class="sub">
+            One dot per shot, placed by how steady the gaze held during it. Further left means
+            steadier — the heavy tick on each row is that row's typical shot.
           </p>
 
           <div class="legend">
@@ -502,34 +736,24 @@ footer a { color: rgba(246, 229, 190, 0.8); }
               Miss
             </span>
             <span class="item">
-              <svg width="12" height="12" aria-hidden="true"><rect x="1.8" y="1.8" width="8.4" height="8.4" fill="#898781"/></svg>
-              Undetermined
+              <svg width="12" height="12" aria-hidden="true"><rect x="1.8" y="1.8" width="8.4" height="8.4" fill="#8a8781"/></svg>
+              Too close to call
             </span>
             <span class="item">
-              <svg width="26" height="12" aria-hidden="true"><line x1="0" y1="6" x2="26" y2="6" stroke="#898781" stroke-width="1.5" stroke-dasharray="5 5"/></svg>
-              2.0° placeholder threshold
+              <svg width="26" height="12" aria-hidden="true"><line x1="0" y1="6" x2="26" y2="6" stroke="#8a8781" stroke-width="1.5" stroke-dasharray="5 5"/></svg>
+              our early "steady" line
             </span>
           </div>
 
           <div class="chartwrap">
-<svg class="chart" viewBox="0 0 720 286" role="img" aria-label="Gaze dispersion for 33 analysed shots, split by outcome. Made shots median 2.53 degrees, missed shots median 2.65 degrees — the two groups overlap almost completely.">
-<line class="grid" x1="78.0" y1="60" x2="78.0" y2="272"/>
-<text class="tick" x="78.0" y="282" text-anchor="middle">0.0</text>
-<line class="grid" x1="202.4" y1="60" x2="202.4" y2="272"/>
-<text class="tick" x="202.4" y="282" text-anchor="middle">1.0</text>
-<line class="grid" x1="326.8" y1="60" x2="326.8" y2="272"/>
-<text class="tick" x="326.8" y="282" text-anchor="middle">2.0</text>
-<line class="grid" x1="451.2" y1="60" x2="451.2" y2="272"/>
-<text class="tick" x="451.2" y="282" text-anchor="middle">3.0</text>
-<line class="grid" x1="575.6" y1="60" x2="575.6" y2="272"/>
-<text class="tick" x="575.6" y="282" text-anchor="middle">4.0</text>
-<line class="grid" x1="700.0" y1="60" x2="700.0" y2="272"/>
-<text class="tick" x="700.0" y="282" text-anchor="middle">5.0</text>
+<svg class="chart" viewBox="0 0 720 286" role="img" aria-label="Gaze steadiness for 33 measured shots, split by outcome. Made shots and missed shots land in almost the same place — the two groups overlap.">
+<line class="grid" x1="78.0" y1="56" x2="700.0" y2="56"/>
+<text class="tick" x="78.0" y="282" text-anchor="start">← steadier</text>
+<text class="tick" x="700.0" y="282" text-anchor="end">wobblier →</text>
 <line class="thresh" x1="326.8" y1="52" x2="326.8" y2="272"/>
-<text class="thresh-lab" x="332.8" y="46">2.0° placeholder threshold</text>
+<text class="thresh-lab" x="332.8" y="46">early "steady" line</text>
 <text class="row-lab" x="4" y="84">Made</text>
 <text class="row-sub" x="4" y="100">12 shots</text>
-<text class="row-sub" x="4" y="114">median 2.53°</text>
 <line class="base" x1="78" y1="96" x2="700" y2="96"/>
 <circle class="m-made" cx="200.7" cy="89" r="5"/>
 <circle class="m-made" cx="208.0" cy="96" r="5"/>
@@ -546,7 +770,6 @@ footer a { color: rgba(246, 229, 190, 0.8); }
 <line class="median" x1="392.7" y1="74" x2="392.7" y2="118"/>
 <text class="row-lab" x="4" y="160">Miss</text>
 <text class="row-sub" x="4" y="176">18 shots</text>
-<text class="row-sub" x="4" y="190">median 2.65°</text>
 <line class="base" x1="78" y1="172" x2="700" y2="172"/>
 <circle class="m-miss" cx="173.7" cy="165" r="4.6"/>
 <circle class="m-miss" cx="237.2" cy="172" r="4.6"/>
@@ -567,9 +790,8 @@ footer a { color: rgba(246, 229, 190, 0.8); }
 <circle class="m-miss" cx="578.7" cy="172" r="4.6"/>
 <circle class="m-miss" cx="633.5" cy="179" r="4.6"/>
 <line class="median" x1="407.2" y1="150" x2="407.2" y2="194"/>
-<text class="row-lab" x="4" y="236">Unknown</text>
+<text class="row-lab" x="4" y="236">Too close to call</text>
 <text class="row-sub" x="4" y="252">3 shots</text>
-<text class="row-sub" x="4" y="266">median 0.84°</text>
 <line class="base" x1="78" y1="248" x2="700" y2="248"/>
 <rect class="m-unk" x="140.1" y="236.8" width="8.4" height="8.4"/>
 <rect class="m-unk" x="177.9" y="243.8" width="8.4" height="8.4"/>
@@ -577,196 +799,89 @@ footer a { color: rgba(246, 229, 190, 0.8); }
 <line class="median" x1="182.1" y1="226" x2="182.1" y2="270"/>
 </svg>
           </div>
-          <p class="axis-title">Gaze dispersion — combined angular SD (degrees)</p>
+          <p class="axis-title">Gaze steadiness during the shot</p>
 
           <div class="note">
-            <b>The honest reading: these two rows overlap.</b> Made shots sit at a median 2.53° and
-            misses at 2.65° — a gap far too small to mean anything across 33 shots from one shooter.
-            Shootbuddy's contribution so far is that the measurement is <em>trustworthy enough to
-            show a null result</em> rather than a flattering one. A larger sample is the next step,
-            not a louder claim.
+            <b>The honest reading: these two rows land almost on top of each other.</b> In this
+            first sample, made shots and missed shots looked nearly the same in how steady the
+            gaze was. That's not the headline we were hoping for — but it's the true one, and
+            it's exactly why the next step is more shots, not a louder claim.
           </div>
         </div>
+      </div>
+    </section>
+  </div>
 
+  <!-- ── What's next ───────────────────────────────────────────────────── -->
+  <div class="wrap">
+    <section aria-labelledby="next-h">
+      <p class="kicker">Where this goes</p>
+      <div class="sectionhead">
+        <h2 id="next-h">What's next</h2>
+        <p>Three things we're working toward.</p>
+      </div>
+      <div class="roadmap">
         <div class="card">
-          <h3>Why medians, not means</h3>
-          <p>
-            With roughly ten shots per group, one mis-detected 2.5&nbsp;second window at 12.8° is
-            enough on its own to flip a made-vs-miss comparison. Medians survive that; means do not.
-          </p>
-          <p>
-            Windows outside 350–1800&nbsp;ms are flagged as detection failures rather than reported
-            as remarkable shots, and the run stops if too many appear.
-          </p>
+          <h3><span class="tag">01</span> A real threshold</h3>
+          <p>Enough sessions to set a genuine, calibrated "steady" line — instead of today's early placeholder.</p>
         </div>
-
         <div class="card">
-          <h3>The 2.0° threshold is a placeholder</h3>
-          <p>
-            The dashed line marks where a shot is labelled <em>quiet</em>. That cutoff is not
-            calibrated — one session cannot establish a defensible one, and pretending otherwise
-            would be the single easiest way to manufacture a result.
-          </p>
-          <p>
-            So it is flagged as a placeholder in the data, in the API, and in every view that
-            renders it, all the way to this page.
-          </p>
+          <h3><span class="tag">02</span> A coach's view</h3>
+          <p>A session summary built for someone coaching a whole team, not just reviewing one shooter's practice.</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag">03</span> Beyond one shooter</h3>
+          <p>The same idea, tested across more shooters, more courts, and more sessions.</p>
         </div>
       </div>
     </section>
   </div>
 
-  <!-- ── Gates ──────────────────────────────────────────────────────────── -->
+  <!-- ── FAQ ───────────────────────────────────────────────────────────── -->
   <div class="wrap">
-    <section aria-labelledby="gates-h">
+    <section id="faq" aria-labelledby="faq-h">
+      <p class="kicker">FAQ</p>
       <div class="sectionhead">
-        <h2 id="gates-h">Three gates that stop confident nonsense</h2>
-        <p>
-          Each of these exists because it caught a run that would otherwise have produced numbers
-          that looked completely fine.
-        </p>
+        <h2 id="faq-h">Questions, answered</h2>
       </div>
-      <div class="steps">
-        <article class="card step">
-          <div class="n">Gate 01</div>
-          <h3>Are these the same event?</h3>
-          <p>
-            A VRS and a phone clip from two <em>different</em> takes once synced together with a
-            confident-looking score of z=61 and produced a meaningless result. Every three-clap
-            marker looks like every other three-clap marker, so audio correlation can "prove" a
-            match that never happened. Wall-clock overlap is now checked first: two recordings
-            that never coexisted in real time cannot be of the same event, whatever the audio says.
-          </p>
-        </article>
-        <article class="card step">
-          <div class="n">Gate 02</div>
-          <h3>Do the claps agree with each other?</h3>
-          <p>
-            Per-shot clap scatter is measured across the session. If the individual markers
-            disagree about the offset, the alignment is not one clock offset plus noise — it is
-            wrong, and the run stops rather than carrying a plausible-looking error through four
-            more stages.
-          </p>
-        </article>
-        <article class="card step">
-          <div class="n">Gate 03</div>
-          <h3>Is this window physically possible?</h3>
-          <p>
-            A quiet-eye window of 2.5&nbsp;seconds is not an extraordinary shot, it is a broken
-            detection. Windows outside a physiologically plausible range are flagged as failures,
-            never averaged in — and the overlay renderer burns every marker onto the video first,
-            so the detections are judged by eye before any number is believed.
-          </p>
-        </article>
+      <div class="faq">
+        <details class="faq-item">
+          <summary>What do I need to use Shootbuddy?</summary>
+          <p>Meta's Aria Gen 2 smart glasses for the shooter, and any phone on a small tripod for the side view. That's the entire hardware list — clap three times to start a shot, then shoot.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does any of my footage get uploaded anywhere?</summary>
+          <p>No. Everything is processed on one computer. Nothing about your face, your eyes, or your practice session is sent anywhere else — there is no cloud step and no server it talks to.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What sport does Shootbuddy work with?</summary>
+          <p>Basketball shooting, today — free throws and jump shots from a fixed spot on the court, with the phone set up side-on.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How accurate is the made/miss detection?</summary>
+          <p>It watches from the side with no net, so most calls are clear-cut. When a shot is genuinely too close to tell, Shootbuddy flags it as uncertain rather than guessing, and it can be corrected by hand in a single tap.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is Shootbuddy a finished product?</summary>
+          <p>Not yet. It's an early-stage project, tested so far across two real outdoor practice sessions rather than a lab. The source is open for anyone who wants to see exactly how it works.</p>
+        </details>
       </div>
     </section>
   </div>
 
-  <!-- ── Claims ─────────────────────────────────────────────────────────── -->
+  <!-- ── Closing CTA ───────────────────────────────────────────────────── -->
   <div class="wrap">
-    <section id="claims" aria-labelledby="claims-h">
-      <div class="sectionhead">
-        <h2 id="claims-h">What the numbers claim — and what they don't</h2>
+    <section aria-labelledby="closing-h">
+      <div class="closing">
+        <h2 id="closing-h">See your <em>quiet eye</em>, one court at a time</h2>
         <p>
-          Published in full, because a measurement tool that hides its caveats is not a measurement
-          tool. This table ships inside the repo and is reproduced here unedited.
+          Shootbuddy is early, on purpose — built in the open, tested on a real hoop, honest
+          about what it doesn't know yet. Start with how it works.
         </p>
-      </div>
-      <div class="card">
-        <div class="tablewrap">
-          <table class="data">
-            <caption class="sr-only" style="position:absolute;left:-9999px">Claims made by the Shootbuddy pipeline and their status</caption>
-            <thead>
-              <tr><th scope="col">Claim</th><th scope="col">Status</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Gaze <strong>dispersion</strong> within a window</td>
-                <td><span class="tag solid">Solid</span><br>Variance is immune to the uncalibrated per-wearer bias.</td>
-              </tr>
-              <tr>
-                <td>Gaze <strong>absolute position</strong> on the hoop</td>
-                <td><span class="tag flagged">Flagged</span><br>Carries a constant unknown bias — the board is drawn relative to the session's own mean fixation, not to the real rim.</td>
-              </tr>
-              <tr>
-                <td>Quiet-eye <strong>duration</strong></td>
-                <td><span class="tag solid">Solid</span><br>Where the overlay confirms the markers. Windows outside 350–1800&nbsp;ms are treated as detection failures, not remarkable shots.</td>
-              </tr>
-              <tr>
-                <td><strong>Quiet / not quiet</strong> at 2.0°</td>
-                <td><span class="tag placeholder">Placeholder</span><br>One session cannot calibrate a defensible cutoff. Flagged as provisional everywhere it appears.</td>
-              </tr>
-              <tr>
-                <td><strong>Made / miss</strong> outcome</td>
-                <td><span class="tag flagged">Geometric</span><br>Side-on, no net. Thin margins and detection gaps return <em>uncertain</em> and are correctable by hand from the dashboard.</td>
-              </tr>
-              <tr>
-                <td><strong>Clock sync</strong></td>
-                <td><span class="tag solid">Solid</span><br>One global offset, ~21&nbsp;ms drift over 5 minutes — under one phone frame of worst-case error.</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="ctas">
+          <a class="pill on-dark" href="#how">See how it works</a>
+          <a class="pill ghost" href="#faq">Read the FAQ</a>
         </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- ── Local-first ────────────────────────────────────────────────────── -->
-  <div class="wrap">
-    <section aria-labelledby="local-h">
-      <div class="sectionhead">
-        <h2 id="local-h">It never leaves the machine</h2>
-      </div>
-      <div class="facts">
-        <div class="fact">
-          <h3>No cloud</h3>
-          <p>Footage of a person's face and eye movements is about as personal as recorded data gets. None of it is uploaded anywhere.</p>
-        </div>
-        <div class="fact">
-          <h3>No database</h3>
-          <p>Every stage reads files off disk and writes files back, under <code>data/sessions/&lt;id&gt;/</code>. Delete the folder and the session is gone.</p>
-        </div>
-        <div class="fact">
-          <h3>No queue, no workers</h3>
-          <p>One Python process, one FastAPI server on port 8770, one React bundle. You can read the whole path end to end.</p>
-        </div>
-        <div class="fact">
-          <h3>Inspectable at every step</h3>
-          <p>Intermediate JSON, overlay sheets and per-shot clips are all left on disk on purpose — so a wrong number can be traced to the stage that made it.</p>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- ── Run it ─────────────────────────────────────────────────────────── -->
-  <div class="wrap">
-    <section id="run" aria-labelledby="run-h">
-      <div class="sectionhead">
-        <h2 id="run-h">Run it</h2>
-        <p>
-          Python 3.12 — <code>projectaria-tools</code> and the CV stack have no 3.14 wheels. Drop
-          the VRS and the phone clip into <code>input/</code>, then:
-        </p>
-      </div>
-      <div class="code">
-<pre><code><span class="c"># setup</span>
-uv venv --python 3.12 .venv
-uv pip install --python .venv/bin/python -r requirements.txt
-brew install ffmpeg
-cd web &amp;&amp; npm install &amp;&amp; npm run build &amp;&amp; cd ..
-
-<span class="c"># match → extract → sync → detect → quiet_eye</span>
-.venv/bin/python run_pipeline.py
-
-<span class="c"># dashboard on :8770 (8000 is taken by Aria Studio)</span>
-.venv/bin/uvicorn app.main:app --reload --port <span class="p">8770</span></code></pre>
-      </div>
-      <div class="card" style="margin-top:16px">
-        <h3>The gates are not optional</h3>
-        <p>
-          <code>run_pipeline.py</code> stops on all three. Each one has already caught a run that
-          otherwise produced confident, meaningless numbers. Don't route around them.
-        </p>
       </div>
     </section>
   </div>
@@ -775,9 +890,24 @@ cd web &amp;&amp; npm install &amp;&amp; npm run build &amp;&amp; cd ..
 
 <footer>
   <div class="wrap">
-    <div class="row">
-      <span><strong style="color:var(--cream)">Shootbuddy</strong> — ICE · Team C</span>
-      <span class="nav-spacer"></span>
+    <div class="fgrid">
+      <div>
+        <a class="wordmark" href="#top">
+          <img src="/assets/favicon-32.png" alt="" width="28" height="28">
+          Shoot<span>buddy</span>
+        </a>
+        <p class="tagline">Quiet-eye training for basketball shooters — measured on your own court, kept on your own machine.</p>
+      </div>
+      <nav aria-label="Footer">
+        <a href="#how">How it works</a>
+        <a href="#science">The science</a>
+        <a href="#results">Early results</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://github.com/designthinking-lk/shoot-buddy-server">View the source</a>
+      </nav>
+    </div>
+    <div class="fnote">
+      <span>© 2026 Shootbuddy</span>
       <span>Figures measured from 2 recorded sessions · 33 analysed shots</span>
     </div>
   </div>

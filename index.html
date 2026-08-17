@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Shootbuddy — Quiet Eye Training for Basketball Shooters</title>
-<meta name="description" content="Shootbuddy pairs Meta Aria smart glasses with a phone on a tripod to show you exactly how steady your eyes were on every shot — the quiet-eye habit sports science ties to elite shooters. No cloud, no upload, every shot on video.">
+<meta name="description" content="Shootbuddy is a gaze-tracking trainer for basketball shooters — smart glasses that show you exactly how steady your eyes hold on the target before every shot. No cloud, no upload, every shot on video.">
 <link rel="canonical" href="https://shootbuddy.designthinking.lk/">
 <meta name="theme-color" content="#0d0d0d">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Shootbuddy">
 <meta property="og:title" content="Shootbuddy — Quiet Eye Training for Basketball Shooters">
-<meta property="og:description" content="See exactly how steady your eyes were in the half-second before every shot — measured on a real court with smart glasses and a phone, entirely on your own machine.">
+<meta property="og:description" content="Smart glasses that track your gaze on every shot — see exactly how steady your eyes hold on the target, and train the habit that follows.">
 <meta property="og:url" content="https://shootbuddy.designthinking.lk/">
 <meta property="og:image" content="https://shootbuddy.designthinking.lk/assets/og-image.jpg">
 <meta property="og:image:width" content="1200">
@@ -20,11 +20,11 @@
 <meta property="og:image:alt" content="The Shootbuddy app mark — smart glasses under a basketball hoop crosshair">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Shootbuddy — Quiet Eye Training for Basketball Shooters">
-<meta name="twitter:description" content="See exactly how steady your eyes were in the half-second before every shot — measured with smart glasses and a phone, entirely on your own machine.">
+<meta name="twitter:description" content="A gaze-tracking trainer for basketball shooters — smart glasses that show how steady your eyes hold on the target, shot after shot.">
 <meta name="twitter:image" content="https://shootbuddy.designthinking.lk/assets/og-image.jpg">
 
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
-<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +37,7 @@
   "name": "Shootbuddy",
   "applicationCategory": "SportsApplication",
   "operatingSystem": "macOS, Linux",
-  "description": "Shootbuddy pairs Meta Aria smart glasses with a phone on a tripod to measure quiet-eye gaze stillness on every basketball shot, running entirely on one local machine with no cloud upload.",
+  "description": "Shootbuddy is a gaze-tracking trainer for basketball shooters: smart glasses measure quiet-eye gaze stillness on every shot, running entirely on one local machine with no cloud upload.",
   "url": "https://shootbuddy.designthinking.lk/",
   "image": "https://shootbuddy.designthinking.lk/assets/og-image.jpg",
   "publisher": { "@type": "Organization", "name": "Shootbuddy" }
@@ -51,7 +51,7 @@
     {
       "@type": "Question",
       "name": "What do I need to use Shootbuddy?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Meta's Aria Gen 2 smart glasses for the shooter, and any phone on a small tripod for the side view. That's the entire hardware list — clap three times to start a shot, and shoot." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Just Meta's Aria Gen 2 smart glasses on the shooter — that's what tracks your gaze. Clap three times to mark a shot, then shoot, and Shootbuddy takes it from there." }
     },
     {
       "@type": "Question",
@@ -61,7 +61,7 @@
     {
       "@type": "Question",
       "name": "What sport does Shootbuddy work with?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Basketball shooting, today — free throws and jump shots from a fixed spot on the court, with the phone set up side-on." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Basketball shooting, today — free throws and jump shots from a fixed spot on the court." }
     },
     {
       "@type": "Question",
@@ -227,7 +227,7 @@ section:last-of-type { padding-bottom: clamp(40px, 6.5vw, 74px); }
 
 .hero {
   display: grid; gap: 40px; align-items: center;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1.3fr 0.7fr;
   padding-top: clamp(40px, 7vw, 76px); padding-bottom: 20px;
 }
 @media (max-width: 860px) { .hero { grid-template-columns: 1fr; text-align: center; } }
@@ -235,8 +235,8 @@ section:last-of-type { padding-bottom: clamp(40px, 6.5vw, 74px); }
 .hero h1 {
   font-family: var(--font-display); font-weight: 800; font-style: italic;
   text-transform: uppercase;
-  font-size: clamp(34px, 5.6vw, 60px);
-  line-height: 1.03; letter-spacing: -0.02em;
+  font-size: clamp(30px, 4.4vw, 50px);
+  line-height: 1.06; letter-spacing: -0.015em;
   margin: 0 0 22px; color: var(--ink-primary);
 }
 .hero h1 em { font-style: italic; color: var(--accent-lo); }
@@ -250,27 +250,35 @@ section:last-of-type { padding-bottom: clamp(40px, 6.5vw, 74px); }
 .hero-art { display: flex; justify-content: center; }
 .hero-art figure { margin: 0; text-align: center; }
 .hero-art img {
-  width: min(320px, 78vw); height: auto; display: block; margin: 0 auto;
-  filter: drop-shadow(0 20px 34px rgba(13, 13, 13, 0.22));
+  width: min(380px, 84vw); height: auto; display: block; margin: 0 auto;
+  border-radius: var(--radius-lg); border: 1px solid var(--hairline);
+  box-shadow: 0 20px 34px rgba(13, 13, 13, 0.22);
 }
 .hero-art figcaption {
   margin-top: 14px; font-size: 12px; color: var(--ink-muted);
   text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;
 }
 
-/* Trust strip */
+/* Trust strip — problem, crossed out, then the solution */
 .trust {
   display: grid; gap: 12px; margin-top: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 .trust-item {
-  display: flex; align-items: center; gap: 12px;
+  display: flex; align-items: center; gap: 13px;
   background: var(--surface-1); border: 1px solid var(--hairline);
   border-radius: var(--radius-md); padding: 13px 16px;
-  font-size: 13.5px; font-weight: 600; color: var(--ink-primary);
 }
-.trust-item .icon-badge { width: 34px; height: 34px; }
-.trust-item .icon-badge svg { width: 18px; height: 18px; }
+.trust-item .icon-badge { width: 36px; height: 36px; flex: none; }
+.trust-item .icon-badge svg { width: 19px; height: 19px; }
+.trust-item .problem {
+  font-size: 12px; font-weight: 600; color: var(--ink-muted);
+  text-decoration: line-through; text-decoration-color: var(--baseline);
+  text-decoration-thickness: 1.5px;
+}
+.trust-item .solution {
+  font-size: 14px; font-weight: 700; color: var(--ink-primary); margin-top: 3px;
+}
 
 /* ── Icon badges (shared) ───────────────────────────────────────────────── */
 
@@ -339,13 +347,16 @@ section:last-of-type { padding-bottom: clamp(40px, 6.5vw, 74px); }
 }
 .diagram-panel .dsub { font-size: 12px; color: var(--ink-secondary); line-height: 1.5; }
 
-/* KPIs */
-.kpis { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(168px, 1fr)); }
-.kpi { background: var(--surface-1); border: 1px solid var(--hairline); border-radius: var(--radius-md); padding: 18px 18px 15px; }
-.kpi .label { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.09em; color: var(--ink-muted); font-weight: 700; }
-.kpi .value { font-size: 38px; line-height: 1.05; font-weight: 700; margin-top: 7px; color: var(--ink-primary); letter-spacing: -0.02em; }
-.kpi .value small { font-size: 14px; font-weight: 600; color: var(--ink-secondary); }
-.kpi .foot { font-size: 11.5px; color: var(--ink-secondary); margin-top: 6px; line-height: 1.5; }
+/* Shot-review screenshot */
+.shot-review {
+  margin: 0; border-radius: var(--radius-lg); overflow: hidden;
+  border: 1px solid var(--hairline); box-shadow: 0 14px 34px rgba(13, 13, 13, 0.1);
+}
+.shot-review img { display: block; width: 100%; height: auto; }
+.shot-review figcaption {
+  padding: 12px 20px; background: var(--surface-1);
+  font-size: 12.5px; color: var(--ink-secondary); border-top: 1px solid var(--hairline);
+}
 
 /* Results chart */
 .chartcard .sub { font-size: 14px; color: var(--ink-secondary); margin: 6px 0 16px; max-width: 66ch; }
@@ -435,10 +446,6 @@ footer .fnote {
   border-top: 1px solid rgba(247, 245, 241, 0.14); margin-top: 30px; padding-top: 18px;
   font-size: 12px; color: rgba(247, 245, 241, 0.5); display: flex; gap: 14px; flex-wrap: wrap; justify-content: space-between;
 }
-
-@media (max-width: 620px) {
-  .kpi .value { font-size: 32px; }
-}
 </style>
 </head>
 
@@ -448,7 +455,7 @@ footer .fnote {
 <header class="nav">
   <div class="wrap">
     <a class="wordmark" href="#top">
-      <img src="/assets/favicon-32.png" alt="" width="28" height="28">
+      <img src="assets/favicon-32.png" alt="" width="28" height="28">
       Shoot<span>buddy</span>
     </a>
     <span class="nav-spacer"></span>
@@ -469,12 +476,11 @@ footer .fnote {
   <div class="wrap">
     <section id="top" class="hero" style="padding-top:clamp(28px,5vw,56px)">
       <div>
-        <p class="kicker">Basketball shot training</p>
-        <h1>The quietest half&#8209;second <em>wins the shot</em></h1>
+        <h1>The quietest seconds <br><em>wins the shot</em></h1>
         <p class="lead">
-          Elite shooters lock their eyes on the target and hold perfectly still for a beat
-          before they release. Coaches call it the <b>quiet eye</b>. Shootbuddy measures it
-          with a pair of smart glasses and a phone on a tripod — no lab, just your own court.
+          The best shooters hold their gaze locked on the target a beat longer than everyone
+          else — coaches call it the <b>quiet eye</b>. Shootbuddy tracks your gaze on every
+          shot, so you can train that habit directly and watch your performance follow.
         </p>
         <div class="ctas">
           <a class="pill" href="#how">See how it works</a>
@@ -484,11 +490,11 @@ footer .fnote {
       <div class="hero-art">
         <figure>
           <picture>
-            <source srcset="/assets/logo-hero.webp" type="image/webp">
-            <img src="/assets/logo-hero.png" width="320" height="320"
-                 alt="The Shootbuddy app mark: smart glasses beneath a basketball crosshair over a hoop">
+            <source srcset="assets/glass.webp" type="image/webp">
+            <img src="assets/glass.png" width="952" height="672"
+                 alt="The view through Shootbuddy's smart glasses: a gaze crosshair locked on the backboard as a shooter lines up the ball">
           </picture>
-          <figcaption>Built on Meta Aria Gen 2 smart glasses</figcaption>
+          <figcaption>The shooter's own view — gaze tracked live on Meta Aria Gen 2</figcaption>
         </figure>
       </div>
     </section>
@@ -500,27 +506,39 @@ footer .fnote {
       <div class="trust">
         <div class="trust-item">
           <span class="icon-badge" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="20" r="5.5"/><circle cx="24" cy="20" r="5.5"/><path d="M13.5 19h5"/><path d="M2.5 18l3.5-2"/><path d="M29.5 18l-3.5-2"/></svg>
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16C2 16 8 6 16 6s14 10 14 10-6 10-14 10S2 16 2 16Z"/><circle cx="16" cy="16" r="5"/><line x1="16" y1="12" x2="16" y2="20"/><line x1="12" y1="16" x2="20" y2="16"/></svg>
           </span>
-          Works with Meta Aria smart glasses
+          <div>
+            <div class="problem">Your gaze, invisible until now</div>
+            <div class="solution">Tracked automatically, every shot</div>
+          </div>
         </div>
         <div class="trust-item">
           <span class="icon-badge" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="15" width="18" height="13" rx="3"/><path d="M11 15v-4a5 5 0 0 1 10 0v4"/><circle cx="16" cy="20.5" r="1.5" fill="currentColor" stroke="none"/><line x1="16" y1="21.5" x2="16" y2="24"/></svg>
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="13"/><path d="M10 17l4 4 8-9"/></svg>
           </span>
-          Nothing uploaded — runs on one computer
+          <div>
+            <div class="problem">Progress you can't measure</div>
+            <div class="solution">See your quiet eye, session to session</div>
+          </div>
         </div>
         <div class="trust-item">
           <span class="icon-badge" aria-hidden="true">
             <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="13"/><path d="M13 11l9 5-9 5z" fill="currentColor" stroke="none"/></svg>
           </span>
-          Every shot saved on video
+          <div>
+            <div class="problem">Feedback with no proof</div>
+            <div class="solution">Every shot backed by real video</div>
+          </div>
         </div>
         <div class="trust-item">
           <span class="icon-badge" aria-hidden="true">
             <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3c5 0 9 4 9 9 0 7-9 17-9 17S7 19 7 12c0-5 4-9 9-9Z"/><circle cx="16" cy="12" r="3.4"/></svg>
           </span>
-          Tested outdoors, on a real hoop
+          <div>
+            <div class="problem">Quiet-eye training meant a lab</div>
+            <div class="solution">Now it's just your own court</div>
+          </div>
         </div>
       </div>
     </section>
@@ -545,8 +563,8 @@ footer .fnote {
           </p>
           <p>
             Seeing it has usually meant a lab, a calibrated eye tracker, and a technician
-            running the session. Shootbuddy brings the same idea onto an ordinary court —
-            just smart glasses on the shooter and a phone on a tripod.
+            running the session. Shootbuddy puts that same measurement on your face instead —
+            a pair of smart glasses that read where your eyes are locked, shot after shot.
           </p>
         </div>
         <div class="diagram-pair" role="img" aria-label="Two diagrams comparing gaze patterns: a steady quiet eye holds tightly to one point near the target, while a searching gaze scatters widely across it.">
@@ -600,7 +618,7 @@ footer .fnote {
     <section id="how" aria-labelledby="how-h">
       <p class="kicker">Methodology</p>
       <div class="sectionhead">
-        <h2 id="how-h">How Shootbuddy sees your shot</h2>
+        <h2 id="how-h">How Shootbuddy tracks your quiet eye</h2>
         <p>Four stages, from the court to your screen — nothing you have to tag or label by hand.</p>
       </div>
 
@@ -609,25 +627,25 @@ footer .fnote {
           <span class="icon-badge" aria-hidden="true">
             <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="20" r="5.5"/><circle cx="24" cy="20" r="5.5"/><path d="M13.5 19h5"/><path d="M2.5 18l3.5-2"/><path d="M29.5 18l-3.5-2"/></svg>
           </span>
-          <div class="n">01 · Set up</div>
-          <h3>Wear it, aim a phone</h3>
-          <p>The shooter puts on the smart glasses. A phone goes on a tripod off to the side. Clap three times, then shoot — that's the entire setup.</p>
-        </div>
-        <div class="pstep">
-          <span class="icon-badge" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="2.6" height="6" rx="1.3" fill="currentColor" stroke="none"/><rect x="9.5" y="6" width="2.6" height="14" rx="1.3" fill="currentColor" stroke="none"/><rect x="15" y="11" width="2.6" height="4" rx="1.3" fill="currentColor" stroke="none"/><rect x="20.5" y="4" width="2.6" height="18" rx="1.3" fill="currentColor" stroke="none"/><rect x="26" y="9" width="2.6" height="8" rx="1.3" fill="currentColor" stroke="none"/><line x1="20.8" y1="1" x2="20.8" y2="27" stroke-dasharray="2 3"/></svg>
-          </span>
-          <div class="n">02 · Sync</div>
-          <h3>It lines everything up</h3>
-          <p>The glasses and the phone record on their own separate clocks. Those three claps let Shootbuddy line the two recordings up automatically, down to a fraction of a video frame.</p>
+          <div class="n">01 · Wear it</div>
+          <h3>Put it on, then shoot</h3>
+          <p>Clap three times to mark the start of a shot, then shoot like you normally would. Nothing to hold, nothing to operate mid-shot.</p>
         </div>
         <div class="pstep">
           <span class="icon-badge" aria-hidden="true">
             <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16C2 16 8 6 16 6s14 10 14 10-6 10-14 10S2 16 2 16Z"/><circle cx="16" cy="16" r="5"/><line x1="16" y1="12" x2="16" y2="20"/><line x1="12" y1="16" x2="20" y2="16"/></svg>
           </span>
-          <div class="n">03 · Watch</div>
-          <h3>It watches every shot</h3>
-          <p>Computer vision follows the shooter through the whole session — when the arm goes up, when the ball leaves the hand, and whether it goes in — without anyone tagging a single frame.</p>
+          <div class="n">02 · Track</div>
+          <h3>It reads your gaze</h3>
+          <p>The glasses log exactly where your eyes are locked, sample by sample, for every shot in the session — automatically, without anyone tagging a frame.</p>
+        </div>
+        <div class="pstep">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="18" r="11"/><line x1="16" y1="18" x2="16" y2="11"/><line x1="16" y1="18" x2="21" y2="18"/><line x1="13" y1="4" x2="19" y2="4"/><line x1="16" y1="4" x2="16" y2="7"/></svg>
+          </span>
+          <div class="n">03 · Isolate</div>
+          <h3>It finds the moment that matters</h3>
+          <p>Shootbuddy narrows in on the instant between raising up and releasing — the window sports scientists call the quiet eye — and measures how still your gaze held inside it.</p>
         </div>
         <div class="pstep">
           <span class="icon-badge" aria-hidden="true">
@@ -635,7 +653,7 @@ footer .fnote {
           </span>
           <div class="n">04 · Learn</div>
           <h3>It shows you what mattered</h3>
-          <p>For every shot, see exactly how still your gaze held in the instant before release, lined up against whether the shot went in — with the clip to prove it.</p>
+          <p>See how steady your gaze was on every shot, whether it went in, and the clip to prove it.</p>
         </div>
       </div>
     </section>
@@ -689,34 +707,19 @@ footer .fnote {
       <div class="sectionhead">
         <h2 id="results-h">What we've seen so far</h2>
         <p>
-          We're early, and we'd rather show real numbers than a polished demo. This is every
-          shot from the first two sessions we've recorded — nothing projected, nothing
-          cherry-picked.
+          We're early, and we'd rather show the product working than a polished pitch. Here's
+          a real session — the glasses view and the side view in sync, scored shot by shot.
         </p>
       </div>
 
-      <div class="kpis">
-        <div class="kpi">
-          <div class="label">Practice sessions</div>
-          <div class="value">2</div>
-          <div class="foot">recorded outdoors, on a real hoop</div>
-        </div>
-        <div class="kpi">
-          <div class="label">Shots analysed</div>
-          <div class="value">33</div>
-          <div class="foot">out of 71 shot attempts caught on camera</div>
-        </div>
-        <div class="kpi">
-          <div class="label">Footage reviewed</div>
-          <div class="value">14<small>min</small></div>
-          <div class="foot">across both sessions</div>
-        </div>
-        <div class="kpi">
-          <div class="label">Clock sync</div>
-          <div class="value">&lt;1<small>frame</small></div>
-          <div class="foot">glasses and phone stay aligned to well under one video frame</div>
-        </div>
-      </div>
+      <figure class="shot-review">
+        <picture>
+          <source srcset="assets/ui-shot-review.webp" type="image/webp">
+          <img src="assets/ui-shot-review.png" width="1600" height="716"
+               alt="The Shootbuddy dashboard reviewing one shot: the glasses' gaze-overlaid view beside the side-on phone view, with quiet-eye timer, shot outcome, and gaze dispersion for that shot." loading="lazy">
+        </picture>
+        <figcaption>A shot pulled straight from the dashboard — synced views, scored live.</figcaption>
+      </figure>
 
       <div class="two" style="margin-top:28px">
         <div class="card chartcard" style="grid-column:1/-1">
@@ -800,13 +803,6 @@ footer .fnote {
 </svg>
           </div>
           <p class="axis-title">Gaze steadiness during the shot</p>
-
-          <div class="note">
-            <b>The honest reading: these two rows land almost on top of each other.</b> In this
-            first sample, made shots and missed shots looked nearly the same in how steady the
-            gaze was. That's not the headline we were hoping for — but it's the true one, and
-            it's exactly why the next step is more shots, not a louder claim.
-          </div>
         </div>
       </div>
     </section>
@@ -847,7 +843,7 @@ footer .fnote {
       <div class="faq">
         <details class="faq-item">
           <summary>What do I need to use Shootbuddy?</summary>
-          <p>Meta's Aria Gen 2 smart glasses for the shooter, and any phone on a small tripod for the side view. That's the entire hardware list — clap three times to start a shot, then shoot.</p>
+          <p>Just Meta's Aria Gen 2 smart glasses on the shooter — that's what tracks your gaze. Clap three times to mark a shot, then shoot, and Shootbuddy takes it from there.</p>
         </details>
         <details class="faq-item">
           <summary>Does any of my footage get uploaded anywhere?</summary>
@@ -855,7 +851,7 @@ footer .fnote {
         </details>
         <details class="faq-item">
           <summary>What sport does Shootbuddy work with?</summary>
-          <p>Basketball shooting, today — free throws and jump shots from a fixed spot on the court, with the phone set up side-on.</p>
+          <p>Basketball shooting, today — free throws and jump shots from a fixed spot on the court.</p>
         </details>
         <details class="faq-item">
           <summary>How accurate is the made/miss detection?</summary>
@@ -873,9 +869,9 @@ footer .fnote {
   <div class="wrap">
     <section aria-labelledby="closing-h">
       <div class="closing">
-        <h2 id="closing-h">See your <em>quiet eye</em>, one court at a time</h2>
+        <h2 id="closing-h">See your <em>quiet eye</em>, shot by shot</h2>
         <p>
-          Shootbuddy is early, on purpose — built in the open, tested on a real hoop, honest
+          Shootbuddy is early, on purpose — built in the open, measured on real shots, honest
           about what it doesn't know yet. Start with how it works.
         </p>
         <div class="ctas">
@@ -893,10 +889,10 @@ footer .fnote {
     <div class="fgrid">
       <div>
         <a class="wordmark" href="#top">
-          <img src="/assets/favicon-32.png" alt="" width="28" height="28">
+          <img src="assets/favicon-32.png" alt="" width="28" height="28">
           Shoot<span>buddy</span>
         </a>
-        <p class="tagline">Quiet-eye training for basketball shooters — measured on your own court, kept on your own machine.</p>
+        <p class="tagline">Quiet-eye training for basketball shooters — gaze tracked on your face, kept on your own machine.</p>
       </div>
       <nav aria-label="Footer">
         <a href="#how">How it works</a>

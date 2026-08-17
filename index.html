@@ -1,2 +1,787 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Smart Mobility — ICE</title><style>:root{color-scheme:dark}*{box-sizing:border-box}html,body{margin:0;height:100%}body{font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#fff;background:radial-gradient(120% 120% at 20% 0%,#6100FF 0%,#0b0a1a 55%);display:flex;align-items:center;justify-content:center;padding:32px;text-align:center}main{max-width:640px}.kicker{letter-spacing:.28em;text-transform:uppercase;font-size:13px;color:rgba(255,255,255,.7);margin:0 0 18px}h1{font-size:clamp(34px,7vw,64px);margin:0 0 14px;line-height:1.05}.lead{font-size:clamp(16px,2.4vw,21px);color:rgba(255,255,255,.85);margin:0 0 28px}.foot{font-size:13px;color:rgba(255,255,255,.55)}code{background:rgba(255,255,255,.12);padding:2px 7px;border-radius:6px}</style></head><body><main><p class="kicker">ICE · Team A</p><h1>Smart Mobility</h1><p class="lead">Rethinking how the city moves — accessible transit for everyone.</p><p class="foot">This is your team's starter site. Push your own code to <code>team-a-website</code> to replace it.</p></main></body></html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shootbuddy — quiet-eye analysis for basketball shooting</title>
+<meta name="description" content="Shootbuddy measures the quiet eye: how still a shooter's gaze holds between arm-raise and release. Meta Aria Gen 2 glasses for gaze, a phone on a tripod for the side view, three claps to align them. Runs entirely on one machine.">
+<meta name="theme-color" content="#703322">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Shootbuddy — quiet-eye analysis for basketball shooting">
+<meta property="og:description" content="Per-shot gaze stillness from smart glasses and a phone. No cloud, no database — every stage reads files off disk and writes files back.">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%234a2016'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23f6e5be' stroke-width='2.5'/%3E%3Ccircle cx='16' cy='16' r='3.5' fill='%23ea3323'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+
+<style>
+/* ─────────────────────────────────────────────────────────────────────────
+   Tokens lifted verbatim from the dashboard's theme.css. The two-layer split
+   is enforced here too:
+
+     CHROME  brick + brand red. Page plane, nav, hero, section heads.
+     DATA    off-white surface. Every chart, every number, every status colour.
+
+   The brand red (#ea3323) is indistinguishable from a status red, so it never
+   appears inside a data card. Inside a card, red means MISS and nothing else.
+   ───────────────────────────────────────────────────────────────────────── */
+:root {
+  --brick-900: #4a2016;
+  --brick-700: #703322;
+  --brick-500: #8a4230;
+  --brand-red: #ea3323;
+  --cream:     #f6e5be;
+
+  --surface-1: #fafaf9;
+  --surface-2: #f2f1ee;
+
+  --ink-primary:   #0b0b0b;
+  --ink-secondary: #52514e;
+  --ink-muted:     #898781;
+  --gridline:      #e1e0d9;
+  --baseline:      #c3c2b7;
+  --hairline:      rgba(11, 11, 11, 0.10);
+
+  /* Validated as a pair on #fafaf9 — CVD dE 17.5. Always shipped with a shape. */
+  --made:    #0ca30c;
+  --miss:    #932525;
+  --unknown: #898781;
+
+  --font-display: "Archivo Black", "Anton", system-ui, sans-serif;
+  --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --radius-lg: 22px;
+  --radius-md: 14px;
+  --radius-sm: 8px;
+
+  --pad: clamp(16px, 4vw, 44px);
+  --maxw: 1180px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(1200px 520px at 72% -8%, var(--brick-500), transparent 62%),
+    var(--brick-700);
+  background-attachment: fixed;
+  color: var(--cream);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad); }
+
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--cream); outline-offset: 3px; border-radius: 4px; }
+
+.skip {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--cream); color: var(--brick-900);
+  padding: 12px 18px; border-radius: 0 0 var(--radius-sm) 0;
+  font-weight: 700; z-index: 100;
+}
+.skip:focus { left: 0; }
+
+/* ── Chrome ─────────────────────────────────────────────────────────────── */
+
+.nav {
+  display: flex; align-items: center; gap: 18px;
+  padding: 18px 0 8px; flex-wrap: wrap;
+}
+.wordmark {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em; text-transform: uppercase;
+  font-size: 24px; color: var(--cream); text-decoration: none;
+  line-height: 1;
+}
+.wordmark span { color: var(--brand-red); }
+.nav-spacer { flex: 1 1 auto; }
+.nav nav { display: flex; gap: 4px; flex-wrap: wrap; }
+.nav nav a {
+  text-decoration: none;
+  color: rgba(246, 229, 190, 0.82);
+  font-size: 14px; font-weight: 600;
+  padding: 8px 13px; border-radius: 999px;
+}
+.nav nav a:hover { background: rgba(246, 229, 190, 0.13); color: var(--cream); }
+
+.hero { padding: clamp(34px, 7vw, 76px) 0 34px; }
+.kicker {
+  letter-spacing: 0.26em; text-transform: uppercase;
+  font-size: 11.5px; font-weight: 700;
+  color: rgba(246, 229, 190, 0.62);
+  margin: 0 0 20px;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: clamp(38px, 7.4vw, 82px);
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+  margin: 0 0 24px;
+  max-width: 15ch;
+  color: var(--surface-1);
+}
+.hero h1 em { font-style: normal; color: var(--cream); }
+.hero .lead {
+  font-size: clamp(16.5px, 1.7vw, 20px);
+  line-height: 1.62;
+  color: rgba(246, 229, 190, 0.9);
+  max-width: 60ch;
+  margin: 0 0 30px;
+}
+.hero .lead b { color: var(--surface-1); font-weight: 600; }
+
+.ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.pill {
+  display: inline-block; text-decoration: none;
+  border: none; border-radius: 999px;
+  padding: 13px 24px;
+  font: 600 15px/1 var(--font-ui);
+  background: var(--brand-red); color: #fff;
+}
+.pill:hover { background: #d02a1b; }
+.pill.ghost {
+  background: transparent; color: var(--cream);
+  border: 1px solid rgba(246, 229, 190, 0.38);
+}
+.pill.ghost:hover { background: rgba(246, 229, 190, 0.13); }
+
+.sectionhead { padding: 0 0 16px; }
+.sectionhead h2 {
+  font-family: var(--font-display);
+  text-transform: uppercase; letter-spacing: -0.01em;
+  font-size: clamp(19px, 2.6vw, 27px);
+  margin: 0; color: var(--cream);
+}
+.sectionhead p {
+  margin: 10px 0 0; max-width: 66ch;
+  font-size: 15.5px; color: rgba(246, 229, 190, 0.76);
+}
+
+section { padding: clamp(34px, 6vw, 62px) 0 0; }
+section:last-of-type { padding-bottom: clamp(34px, 6vw, 62px); }
+
+/* ── Data layer ─────────────────────────────────────────────────────────── */
+
+.card {
+  background: var(--surface-1);
+  color: var(--ink-primary);
+  border-radius: var(--radius-lg);
+  padding: 22px clamp(18px, 2.4vw, 26px) 24px;
+  box-shadow: 0 1px 0 var(--hairline);
+}
+.card h3 {
+  font-family: var(--font-display);
+  text-transform: uppercase; letter-spacing: -0.01em;
+  font-size: 15px; margin: 0 0 4px; color: var(--ink-primary);
+}
+.card p { font-size: 14.5px; color: var(--ink-secondary); margin: 0 0 12px; max-width: 70ch; }
+.card p:last-child { margin-bottom: 0; }
+
+.kpis {
+  display: grid; gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+}
+.kpi { background: var(--surface-1); border-radius: var(--radius-md); padding: 17px 18px 15px; }
+.kpi .label {
+  font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.09em;
+  color: var(--ink-muted); font-weight: 700;
+}
+.kpi .value {
+  font-size: 38px; line-height: 1.05; font-weight: 700;
+  margin-top: 6px; color: var(--ink-primary);
+}
+.kpi .value small { font-size: 14px; font-weight: 600; color: var(--ink-secondary); }
+.kpi .foot { font-size: 11.5px; color: var(--ink-secondary); margin-top: 5px; line-height: 1.5; }
+
+.steps { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); }
+.step .n {
+  font-family: var(--font-display);
+  font-size: 13px; color: var(--ink-muted);
+  letter-spacing: 0.06em; margin-bottom: 10px;
+}
+.step ul { margin: 12px 0 0; padding-left: 18px; font-size: 13.5px; color: var(--ink-secondary); }
+.step li { margin-bottom: 5px; }
+.step li:last-child { margin-bottom: 0; }
+
+.two { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+
+/* Chart card — the only place status colour is allowed */
+.chartcard { grid-column: 1 / -1; }
+.legend {
+  display: flex; gap: 18px; flex-wrap: wrap; align-items: center;
+  font-size: 12.5px; color: var(--ink-secondary); margin: 4px 0 14px;
+}
+.legend .item { display: inline-flex; align-items: center; gap: 7px; }
+.legend svg { flex: none; }
+
+.chartwrap { overflow-x: auto; }
+.chart { display: block; width: 100%; min-width: 560px; height: auto; }
+.chart .grid { stroke: var(--gridline); stroke-width: 1; }
+.chart .base  { stroke: var(--gridline); stroke-width: 1; }
+.chart .thresh { stroke: var(--ink-muted); stroke-width: 1.5; stroke-dasharray: 5 5; }
+.chart .thresh-lab { font: 600 11px var(--font-ui); fill: var(--ink-secondary); }
+.chart .tick { font: 500 11px var(--font-ui); fill: var(--ink-muted); }
+.chart .row-lab {
+  font: 700 11px var(--font-ui); fill: var(--ink-primary);
+  text-transform: uppercase; letter-spacing: 0.07em;
+}
+.chart .row-sub { font: 500 10.5px var(--font-ui); fill: var(--ink-muted); }
+.chart .median { stroke: var(--ink-primary); stroke-width: 2.5; }
+.chart .m-made { fill: var(--made); }
+.chart .m-miss { fill: none; stroke: var(--miss); stroke-width: 2; }
+.chart .m-unk  { fill: var(--unknown); }
+.axis-title {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--ink-muted); font-weight: 700; text-align: center; margin: 6px 0 0;
+}
+
+.note {
+  font-size: 12.5px; color: var(--ink-secondary);
+  background: var(--surface-2);
+  border-left: 3px solid var(--baseline);
+  padding: 11px 14px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin-top: 16px; line-height: 1.55;
+}
+.note b { color: var(--ink-primary); }
+
+.tablewrap { overflow-x: auto; margin-top: 6px; }
+table.data { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 13.5px; }
+table.data th, table.data td {
+  text-align: left; padding: 11px 12px;
+  border-bottom: 1px solid var(--gridline); vertical-align: top;
+}
+table.data th {
+  color: var(--ink-muted); font-weight: 700; text-transform: uppercase;
+  font-size: 10.5px; letter-spacing: 0.07em; white-space: nowrap;
+}
+table.data td:first-child { color: var(--ink-primary); font-weight: 600; width: 38%; }
+table.data td:last-child { color: var(--ink-secondary); }
+table.data tr:last-child td { border-bottom: none; }
+
+.tag {
+  display: inline-block; font-size: 10.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.07em;
+  padding: 3px 9px; border-radius: 999px; margin-bottom: 5px;
+  background: var(--surface-2); color: var(--ink-secondary);
+}
+.tag.solid       { background: #e3f3e3; color: #0a6b0a; }
+.tag.flagged     { background: var(--surface-2); color: var(--ink-secondary); }
+.tag.placeholder { background: #f4e2e2; color: var(--miss); }
+
+/* Code — chrome layer, so it sits on ink not on a data surface */
+.code {
+  background: var(--brick-900);
+  border: 1px solid rgba(246, 229, 190, 0.16);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  overflow-x: auto;
+  margin: 0;
+}
+.code pre { margin: 0; }
+.code code {
+  font: 13px/1.85 ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  color: var(--cream); white-space: pre;
+}
+.code .c { color: rgba(246, 229, 190, 0.5); }
+.code .p { color: var(--brand-red); font-weight: 700; }
+
+.facts { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.fact h3 {
+  font-family: var(--font-display); text-transform: uppercase;
+  font-size: 14px; margin: 0 0 8px; color: var(--cream);
+}
+.fact p { margin: 0; font-size: 14.5px; color: rgba(246, 229, 190, 0.78); }
+
+footer {
+  border-top: 1px solid rgba(246, 229, 190, 0.18);
+  margin-top: clamp(30px, 6vw, 58px);
+  padding: 30px 0 44px;
+  font-size: 13.5px; color: rgba(246, 229, 190, 0.6);
+}
+footer .row { display: flex; gap: 18px; flex-wrap: wrap; align-items: baseline; }
+footer .row .nav-spacer { flex: 1 1 auto; }
+footer a { color: rgba(246, 229, 190, 0.8); }
+
+@media (max-width: 620px) {
+  .kpi .value { font-size: 32px; }
+  .hero { padding-top: 26px; }
+}
+</style>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+  <header class="nav">
+    <a class="wordmark" href="/">Shoot<span>buddy</span></a>
+    <span class="nav-spacer"></span>
+    <nav aria-label="Sections">
+      <a href="#how">How it works</a>
+      <a href="#metric">The metric</a>
+      <a href="#claims">What it claims</a>
+      <a href="#run">Run it</a>
+    </nav>
+  </header>
+</div>
+
+<main id="main">
+
+  <!-- ── Hero ───────────────────────────────────────────────────────────── -->
+  <div class="wrap">
+    <section class="hero" style="padding-top:clamp(30px,6vw,68px)">
+      <p class="kicker">ICE · Team C</p>
+      <h1>The last half&#8209;second <em>before you shoot</em></h1>
+      <p class="lead">
+        Elite shooters hold their gaze still on the target just before release. Sports science
+        calls it the <b>quiet eye</b>, and until now measuring it meant a lab. Shootbuddy measures
+        it on an outdoor court from <b>a pair of smart glasses and a phone on a tripod</b> —
+        every shot, every session, entirely on your own machine.
+      </p>
+      <div class="ctas">
+        <a class="pill" href="#how">How it works</a>
+        <a class="pill ghost" href="#claims">What the numbers claim</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── Numbers ────────────────────────────────────────────────────────── -->
+  <div class="wrap">
+    <section aria-labelledby="numbers-h" style="padding-top:6px">
+      <div class="sectionhead">
+        <h2 id="numbers-h">Two sessions, on a real court</h2>
+        <p>
+          14&nbsp;minutes 14&nbsp;seconds of footage, 71&nbsp;clap markers, 33&nbsp;shots with a
+          complete quiet-eye window. Everything below is measured from those recordings — nothing
+          here is a projection.
+        </p>
+      </div>
+      <div class="kpis">
+        <div class="kpi">
+          <div class="label">Shots analysed</div>
+          <div class="value">33</div>
+          <div class="foot">of 71 clap markers recorded</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Accuracy</div>
+          <div class="value">40<small>%</small></div>
+          <div class="foot">12 made · 18 miss · 3 undetermined</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Median dispersion</div>
+          <div class="value">2.50<small>°</small></div>
+          <div class="foot">angular SD, all shots pooled</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Median quiet eye</div>
+          <div class="value">800<small>ms</small></div>
+          <div class="foot">arm-raise → release</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Clock drift</div>
+          <div class="value">21<small>ms</small></div>
+          <div class="foot">over 5 min — under one phone frame</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── How it works ───────────────────────────────────────────────────── -->
+  <div class="wrap">
+    <section id="how" aria-labelledby="how-h">
+      <div class="sectionhead">
+        <h2 id="how-h">Four stages, each one checkable</h2>
+        <p>
+          No stage is trusted because the stage before it looked confident. Every one writes files
+          to disk that you can open, and two of them stop the run outright if the evidence is thin.
+        </p>
+      </div>
+      <div class="steps">
+
+        <article class="card step">
+          <div class="n">01</div>
+          <h3>Record</h3>
+          <p>
+            Meta Aria Gen&nbsp;2 glasses on the shooter, a phone on a tripod side-on. Clap three
+            times, then shoot.
+          </p>
+          <ul>
+            <li>Glasses give RGB, 8-mic audio and eye gaze</li>
+            <li>Phone gives the side view the pipeline scores shots from</li>
+            <li>1–6&nbsp;GB per VRS recording</li>
+          </ul>
+        </article>
+
+        <article class="card step">
+          <div class="n">02</div>
+          <h3>Sync</h3>
+          <p>
+            The three claps line up two clocks that never agreed. One global offset, ~21&nbsp;ms of
+            drift over five minutes.
+          </p>
+          <ul>
+            <li>Wall-clock overlap checked <em>before</em> audio is trusted</li>
+            <li>Per-shot windows carved from the aligned timeline</li>
+            <li>Worst-case error under one phone frame</li>
+          </ul>
+        </article>
+
+        <article class="card step">
+          <div class="n">03</div>
+          <h3>Detect</h3>
+          <p>
+            YOLO11 pose finds the arm raise. YOLO11 detection finds the ball, the release, and
+            whether it went in.
+          </p>
+          <ul>
+            <li>Every marker burned onto the video to judge by eye</li>
+            <li>Thin margins return <em>uncertain</em> rather than guessing</li>
+            <li>Wrong outcomes are correctable from the dashboard</li>
+          </ul>
+        </article>
+
+        <article class="card step">
+          <div class="n">04</div>
+          <h3>Measure</h3>
+          <p>
+            Slice the gaze samples between raise and release, and measure how far they wandered.
+          </p>
+          <ul>
+            <li>Per-axis SD — <em>which way</em> the gaze drifted</li>
+            <li>Combined SD — one number to rank shots</li>
+            <li>BCEA — the 68% confidence ellipse area</li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- ── The metric ─────────────────────────────────────────────────────── -->
+  <div class="wrap">
+    <section id="metric" aria-labelledby="metric-h">
+      <div class="sectionhead">
+        <h2 id="metric-h">The metric, and what it actually showed</h2>
+        <p>
+          Dispersion is the headline instead of where-on-the-hoop-they-looked for a measured
+          reason: the gaze is uncalibrated, so it carries a fixed per-wearer bias. Variance is
+          translation-invariant — a constant offset cancels out of it completely, and does not
+          cancel out of absolute position.
+        </p>
+      </div>
+
+      <div class="two">
+        <div class="card chartcard">
+          <h3>Every analysed shot, pooled</h3>
+          <p>
+            One mark per shot, placed by the gaze dispersion measured inside its quiet-eye window.
+            The heavy tick is each row's median.
+          </p>
+
+          <div class="legend">
+            <span class="item">
+              <svg width="12" height="12" aria-hidden="true"><circle cx="6" cy="6" r="5" fill="#0ca30c"/></svg>
+              Made
+            </span>
+            <span class="item">
+              <svg width="12" height="12" aria-hidden="true"><circle cx="6" cy="6" r="4.6" fill="none" stroke="#932525" stroke-width="2"/></svg>
+              Miss
+            </span>
+            <span class="item">
+              <svg width="12" height="12" aria-hidden="true"><rect x="1.8" y="1.8" width="8.4" height="8.4" fill="#898781"/></svg>
+              Undetermined
+            </span>
+            <span class="item">
+              <svg width="26" height="12" aria-hidden="true"><line x1="0" y1="6" x2="26" y2="6" stroke="#898781" stroke-width="1.5" stroke-dasharray="5 5"/></svg>
+              2.0° placeholder threshold
+            </span>
+          </div>
+
+          <div class="chartwrap">
+<svg class="chart" viewBox="0 0 720 286" role="img" aria-label="Gaze dispersion for 33 analysed shots, split by outcome. Made shots median 2.53 degrees, missed shots median 2.65 degrees — the two groups overlap almost completely.">
+<line class="grid" x1="78.0" y1="60" x2="78.0" y2="272"/>
+<text class="tick" x="78.0" y="282" text-anchor="middle">0.0</text>
+<line class="grid" x1="202.4" y1="60" x2="202.4" y2="272"/>
+<text class="tick" x="202.4" y="282" text-anchor="middle">1.0</text>
+<line class="grid" x1="326.8" y1="60" x2="326.8" y2="272"/>
+<text class="tick" x="326.8" y="282" text-anchor="middle">2.0</text>
+<line class="grid" x1="451.2" y1="60" x2="451.2" y2="272"/>
+<text class="tick" x="451.2" y="282" text-anchor="middle">3.0</text>
+<line class="grid" x1="575.6" y1="60" x2="575.6" y2="272"/>
+<text class="tick" x="575.6" y="282" text-anchor="middle">4.0</text>
+<line class="grid" x1="700.0" y1="60" x2="700.0" y2="272"/>
+<text class="tick" x="700.0" y="282" text-anchor="middle">5.0</text>
+<line class="thresh" x1="326.8" y1="52" x2="326.8" y2="272"/>
+<text class="thresh-lab" x="332.8" y="46">2.0° placeholder threshold</text>
+<text class="row-lab" x="4" y="84">Made</text>
+<text class="row-sub" x="4" y="100">12 shots</text>
+<text class="row-sub" x="4" y="114">median 2.53°</text>
+<line class="base" x1="78" y1="96" x2="700" y2="96"/>
+<circle class="m-made" cx="200.7" cy="89" r="5"/>
+<circle class="m-made" cx="208.0" cy="96" r="5"/>
+<circle class="m-made" cx="258.2" cy="103" r="5"/>
+<circle class="m-made" cx="280.5" cy="89" r="5"/>
+<circle class="m-made" cx="316.3" cy="96" r="5"/>
+<circle class="m-made" cx="389.4" cy="103" r="5"/>
+<circle class="m-made" cx="395.9" cy="89" r="5"/>
+<circle class="m-made" cx="412.8" cy="96" r="5"/>
+<circle class="m-made" cx="437.5" cy="103" r="5"/>
+<circle class="m-made" cx="442.7" cy="89" r="5"/>
+<circle class="m-made" cx="471.0" cy="96" r="5"/>
+<circle class="m-made" cx="651.6" cy="103" r="5"/>
+<line class="median" x1="392.7" y1="74" x2="392.7" y2="118"/>
+<text class="row-lab" x="4" y="160">Miss</text>
+<text class="row-sub" x="4" y="176">18 shots</text>
+<text class="row-sub" x="4" y="190">median 2.65°</text>
+<line class="base" x1="78" y1="172" x2="700" y2="172"/>
+<circle class="m-miss" cx="173.7" cy="165" r="4.6"/>
+<circle class="m-miss" cx="237.2" cy="172" r="4.6"/>
+<circle class="m-miss" cx="296.8" cy="179" r="4.6"/>
+<circle class="m-miss" cx="306.1" cy="165" r="4.6"/>
+<circle class="m-miss" cx="310.5" cy="172" r="4.6"/>
+<circle class="m-miss" cx="319.2" cy="179" r="4.6"/>
+<circle class="m-miss" cx="366.7" cy="165" r="4.6"/>
+<circle class="m-miss" cx="377.3" cy="172" r="4.6"/>
+<circle class="m-miss" cx="404.2" cy="179" r="4.6"/>
+<circle class="m-miss" cx="410.2" cy="165" r="4.6"/>
+<circle class="m-miss" cx="436.0" cy="172" r="4.6"/>
+<circle class="m-miss" cx="442.2" cy="179" r="4.6"/>
+<circle class="m-miss" cx="446.4" cy="165" r="4.6"/>
+<circle class="m-miss" cx="446.7" cy="172" r="4.6"/>
+<circle class="m-miss" cx="494.9" cy="179" r="4.6"/>
+<circle class="m-miss" cx="501.7" cy="165" r="4.6"/>
+<circle class="m-miss" cx="578.7" cy="172" r="4.6"/>
+<circle class="m-miss" cx="633.5" cy="179" r="4.6"/>
+<line class="median" x1="407.2" y1="150" x2="407.2" y2="194"/>
+<text class="row-lab" x="4" y="236">Unknown</text>
+<text class="row-sub" x="4" y="252">3 shots</text>
+<text class="row-sub" x="4" y="266">median 0.84°</text>
+<line class="base" x1="78" y1="248" x2="700" y2="248"/>
+<rect class="m-unk" x="140.1" y="236.8" width="8.4" height="8.4"/>
+<rect class="m-unk" x="177.9" y="243.8" width="8.4" height="8.4"/>
+<rect class="m-unk" x="324.7" y="250.8" width="8.4" height="8.4"/>
+<line class="median" x1="182.1" y1="226" x2="182.1" y2="270"/>
+</svg>
+          </div>
+          <p class="axis-title">Gaze dispersion — combined angular SD (degrees)</p>
+
+          <div class="note">
+            <b>The honest reading: these two rows overlap.</b> Made shots sit at a median 2.53° and
+            misses at 2.65° — a gap far too small to mean anything across 33 shots from one shooter.
+            Shootbuddy's contribution so far is that the measurement is <em>trustworthy enough to
+            show a null result</em> rather than a flattering one. A larger sample is the next step,
+            not a louder claim.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Why medians, not means</h3>
+          <p>
+            With roughly ten shots per group, one mis-detected 2.5&nbsp;second window at 12.8° is
+            enough on its own to flip a made-vs-miss comparison. Medians survive that; means do not.
+          </p>
+          <p>
+            Windows outside 350–1800&nbsp;ms are flagged as detection failures rather than reported
+            as remarkable shots, and the run stops if too many appear.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>The 2.0° threshold is a placeholder</h3>
+          <p>
+            The dashed line marks where a shot is labelled <em>quiet</em>. That cutoff is not
+            calibrated — one session cannot establish a defensible one, and pretending otherwise
+            would be the single easiest way to manufacture a result.
+          </p>
+          <p>
+            So it is flagged as a placeholder in the data, in the API, and in every view that
+            renders it, all the way to this page.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── Gates ──────────────────────────────────────────────────────────── -->
+  <div class="wrap">
+    <section aria-labelledby="gates-h">
+      <div class="sectionhead">
+        <h2 id="gates-h">Three gates that stop confident nonsense</h2>
+        <p>
+          Each of these exists because it caught a run that would otherwise have produced numbers
+          that looked completely fine.
+        </p>
+      </div>
+      <div class="steps">
+        <article class="card step">
+          <div class="n">Gate 01</div>
+          <h3>Are these the same event?</h3>
+          <p>
+            A VRS and a phone clip from two <em>different</em> takes once synced together with a
+            confident-looking score of z=61 and produced a meaningless result. Every three-clap
+            marker looks like every other three-clap marker, so audio correlation can "prove" a
+            match that never happened. Wall-clock overlap is now checked first: two recordings
+            that never coexisted in real time cannot be of the same event, whatever the audio says.
+          </p>
+        </article>
+        <article class="card step">
+          <div class="n">Gate 02</div>
+          <h3>Do the claps agree with each other?</h3>
+          <p>
+            Per-shot clap scatter is measured across the session. If the individual markers
+            disagree about the offset, the alignment is not one clock offset plus noise — it is
+            wrong, and the run stops rather than carrying a plausible-looking error through four
+            more stages.
+          </p>
+        </article>
+        <article class="card step">
+          <div class="n">Gate 03</div>
+          <h3>Is this window physically possible?</h3>
+          <p>
+            A quiet-eye window of 2.5&nbsp;seconds is not an extraordinary shot, it is a broken
+            detection. Windows outside a physiologically plausible range are flagged as failures,
+            never averaged in — and the overlay renderer burns every marker onto the video first,
+            so the detections are judged by eye before any number is believed.
+          </p>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── Claims ─────────────────────────────────────────────────────────── -->
+  <div class="wrap">
+    <section id="claims" aria-labelledby="claims-h">
+      <div class="sectionhead">
+        <h2 id="claims-h">What the numbers claim — and what they don't</h2>
+        <p>
+          Published in full, because a measurement tool that hides its caveats is not a measurement
+          tool. This table ships inside the repo and is reproduced here unedited.
+        </p>
+      </div>
+      <div class="card">
+        <div class="tablewrap">
+          <table class="data">
+            <caption class="sr-only" style="position:absolute;left:-9999px">Claims made by the Shootbuddy pipeline and their status</caption>
+            <thead>
+              <tr><th scope="col">Claim</th><th scope="col">Status</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Gaze <strong>dispersion</strong> within a window</td>
+                <td><span class="tag solid">Solid</span><br>Variance is immune to the uncalibrated per-wearer bias.</td>
+              </tr>
+              <tr>
+                <td>Gaze <strong>absolute position</strong> on the hoop</td>
+                <td><span class="tag flagged">Flagged</span><br>Carries a constant unknown bias — the board is drawn relative to the session's own mean fixation, not to the real rim.</td>
+              </tr>
+              <tr>
+                <td>Quiet-eye <strong>duration</strong></td>
+                <td><span class="tag solid">Solid</span><br>Where the overlay confirms the markers. Windows outside 350–1800&nbsp;ms are treated as detection failures, not remarkable shots.</td>
+              </tr>
+              <tr>
+                <td><strong>Quiet / not quiet</strong> at 2.0°</td>
+                <td><span class="tag placeholder">Placeholder</span><br>One session cannot calibrate a defensible cutoff. Flagged as provisional everywhere it appears.</td>
+              </tr>
+              <tr>
+                <td><strong>Made / miss</strong> outcome</td>
+                <td><span class="tag flagged">Geometric</span><br>Side-on, no net. Thin margins and detection gaps return <em>uncertain</em> and are correctable by hand from the dashboard.</td>
+              </tr>
+              <tr>
+                <td><strong>Clock sync</strong></td>
+                <td><span class="tag solid">Solid</span><br>One global offset, ~21&nbsp;ms drift over 5 minutes — under one phone frame of worst-case error.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── Local-first ────────────────────────────────────────────────────── -->
+  <div class="wrap">
+    <section aria-labelledby="local-h">
+      <div class="sectionhead">
+        <h2 id="local-h">It never leaves the machine</h2>
+      </div>
+      <div class="facts">
+        <div class="fact">
+          <h3>No cloud</h3>
+          <p>Footage of a person's face and eye movements is about as personal as recorded data gets. None of it is uploaded anywhere.</p>
+        </div>
+        <div class="fact">
+          <h3>No database</h3>
+          <p>Every stage reads files off disk and writes files back, under <code>data/sessions/&lt;id&gt;/</code>. Delete the folder and the session is gone.</p>
+        </div>
+        <div class="fact">
+          <h3>No queue, no workers</h3>
+          <p>One Python process, one FastAPI server on port 8770, one React bundle. You can read the whole path end to end.</p>
+        </div>
+        <div class="fact">
+          <h3>Inspectable at every step</h3>
+          <p>Intermediate JSON, overlay sheets and per-shot clips are all left on disk on purpose — so a wrong number can be traced to the stage that made it.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── Run it ─────────────────────────────────────────────────────────── -->
+  <div class="wrap">
+    <section id="run" aria-labelledby="run-h">
+      <div class="sectionhead">
+        <h2 id="run-h">Run it</h2>
+        <p>
+          Python 3.12 — <code>projectaria-tools</code> and the CV stack have no 3.14 wheels. Drop
+          the VRS and the phone clip into <code>input/</code>, then:
+        </p>
+      </div>
+      <div class="code">
+<pre><code><span class="c"># setup</span>
+uv venv --python 3.12 .venv
+uv pip install --python .venv/bin/python -r requirements.txt
+brew install ffmpeg
+cd web &amp;&amp; npm install &amp;&amp; npm run build &amp;&amp; cd ..
+
+<span class="c"># match → extract → sync → detect → quiet_eye</span>
+.venv/bin/python run_pipeline.py
+
+<span class="c"># dashboard on :8770 (8000 is taken by Aria Studio)</span>
+.venv/bin/uvicorn app.main:app --reload --port <span class="p">8770</span></code></pre>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <h3>The gates are not optional</h3>
+        <p>
+          <code>run_pipeline.py</code> stops on all three. Each one has already caught a run that
+          otherwise produced confident, meaningless numbers. Don't route around them.
+        </p>
+      </div>
+    </section>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="row">
+      <span><strong style="color:var(--cream)">Shootbuddy</strong> — ICE · Team C</span>
+      <span class="nav-spacer"></span>
+      <span>Figures measured from 2 recorded sessions · 33 analysed shots</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
